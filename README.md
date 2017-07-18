@@ -1,2 +1,3 @@
 # dotfiles
-My dot files for safe keeping
+
+My dot files for safe keeping.
