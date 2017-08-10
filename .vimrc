@@ -116,8 +116,8 @@ map <c-j> <c-w>j    " <ctrl - move> to move around the windows
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
-map <Leader>m <esc>:tabprevious<CR> " easier tab moving
-map <Leader>. <esc>:tabnext<CR>
+map <Leader>m gT                    " eaiser tab moving
+map <Leader>. gt
 vnoremap <c-c> "+y                  " quick copy to system clipboard
 vnoremap <Leader>s :sort<CR>        " map sort function to a key
 nnoremap <space> za
