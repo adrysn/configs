@@ -10,59 +10,57 @@ call vundle#begin()
 " let vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " add all your plugins here (note older versions of Vundle used Bundle instead of Plugins)
-Plugin 'tpope/vim-fugitive'         " git wrapper
-Plugin 'scrooloose/nerdtree'        " file tree explorer
-    map <c-n> <ESC>:NERDTree<CR>
+
+"" Visual
+Plugin 'airblade/vim-gitgutter'     " shows a git diff in the gutter
 Plugin 'vim-airline/vim-airline'    " pretty status bar
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'airblade/vim-gitgutter'     " shows a git diff in the gutter
-    set updatetime=250
-Plugin 'ctrlpvim/ctrlp.vim'         " finder
-    let g:ctrlp_custom_ignore = {
-        \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-        \ 'file': '\v\.(exe|so|dll)$',
-        \ 'link': 'some_bad_symbolic_links',
-        \ }
-    set wildignore+=*.pyc
-    set wildignore+=*_build/*
-    set wildignore+=*/coverage/*
-Plugin 'tmhedberg/SimpylFold'       " better code folding
-    let g:SimpylFold_docstring_preview = 1
+set updatetime=250      " vim-gutter
+" vim-airline
+let g:airline_powerline_fonts = 1
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
+
+"" Addons
+Plugin 'ctrlpvim/ctrlp.vim'     " finder
+"Plugin 'scrooloose/nerdtree'   " file tree explorer
+"Plugin 'tpope/vim-vinegar'
+"Plugin 'tpope/vim-surround'    " quick parenthesis actions
+"map <c-n> <ESC>:NERDTree<CR>   " nerdtree
+" ctrlp.vim
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/](\.(git|hg|svn)|(__pycache__|build|dist|venv[^\/]*))$',
+    \ 'file': '\v\.(exe|so|dll)$',
+    \ 'link': 'some_bad_symbolic_links',
+    \ }
+set wildignore+=*.pyc
+set wildignore+=*_build/*
+set wildignore+=*/coverage/*
+
 "" Syntax
-Plugin 'Valloric/YouCompleteMe'     " auto-completion
-    let g:ycm_python_binary_path = 'python'
-    let g:ycm_collect_identifiers_from_tags_files = 1
-    let g:ycm_use_ultisnips_completer = 1
-    let g:ycm_seed_identifiers_with_syntax = 1
-    let g:ycm_complete_in_comments = 1
-    let g:ycm_complete_in_strings = 1
-Plugin 'SirVer/ultisnips'           " ultimate solution for snippet
-Plugin 'honza/vim-snippets'
-    let g:UltiSnipsExpandTrigger       = "<c-j>"
-    let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
-    let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
-    let g:UltiSnipsListSnippets        = "<c-k>"
-Plugin 'nathanaelkane/vim-indent-guides'  " visually display indent levens
-    let g:indent_guides_enable_on_vim_startup = 1
-    let g:indent_guides_start_level = 2
-    let g:indent_guides_guide_size = 1
-    let g:indent_guides_auto_colors = 0
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=red   ctermbg=237
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=236
-Plugin 'scrooloose/syntastic'       " syntax checking/highlighting
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_python_checkers = ['pylint']
-    let g:syntastic_check_on_open = 1
-    let g:syntastic_check_on_wq = 0
-Plugin 'plasticboy/vim-markdown'
-    let g:vim_markdown_folding_disabled = 1
-Plugin 'pangloss/vim-javascript'
-Plugin 'webdesus/polymer-ide.vim'
-Plugin 'sjl/vitality.vim'
-    let g:polymer_ide#use_syntastic = 1
-    let g:syntastic_html_checkers = ['polylint']
-    let g:syntastic_djangohtml_checkers = ['polylint']
+Plugin 'nvie/vim-flake8'
+Plugin 'Valloric/YouCompleteMe'
+"Plugin 'scrooloose/syntastic'
+"Plugin 'achimnol/python-syntax'
+"Plugin 'plasticboy/vim-markdown'
+"Plugin 'pangloss/vim-javascript'
+"Plugin 'webdesus/polymer-ide.vim'
+autocmd BufWritePost *.py call Flake8()     " vim-flake8
+"let g:vim_markdown_folding_disabled = 1    " vim-markdown
+" YouCompleteMe
+let g:ycm_python_binary_path = 'python'
+"let g:ycm_collect_identifiers_from_tags_files = 1
+"let g:ycm_use_ultisnips_completer = 1
+"let g:ycm_seed_identifiers_with_syntax = 1
+"let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+" syntastic
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_python_checkers = []
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+
 call vundle#end()           " required
 filetype plugin indent on   " required
 
@@ -71,14 +69,13 @@ filetype plugin indent on   " required
 autocmd! bufwritepost .vimrc source %   " auto reload .vimrc when saved
 autocmd FocusLost * wall
 " autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-let python_highlight_all=1
+"let python_highlight_all=1
 syntax on               " syntax highlighting
 set encoding=utf-8      " use UTF-8
 colorscheme pablo
 
 " ============================================================================
 " Options
-set cursorline          " show a visual line under the cursor's current line
 set autoindent          " indent when moving to the next line while writing code
 set smartindent         " tab is converted to 4 spaces (Python convention)
 set tabstop=4
@@ -86,7 +83,7 @@ set shiftwidth=0        " use tabstop value
 set softtabstop=-1      " use shiftwidth value
 " set textwidth=80
 set colorcolumn=80      " draw vertical line
-highlight ColorColumn ctermbg=darkgreen guibg=darkgreen
+highlight ColorColumn ctermbg=black guibg=black
 set expandtab
 set smarttab
 set fileformat=unix
@@ -121,6 +118,7 @@ map <c-l> <c-w>l
 map <c-h> <c-w>h
 map <Leader>m <esc>:tabprevious<CR> " easier tab moving
 map <Leader>. <esc>:tabnext<CR>
+vnoremap <c-c> "+y                  " quick copy to system clipboard
 vnoremap <Leader>s :sort<CR>        " map sort function to a key
 nnoremap <space> za
 
