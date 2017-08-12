@@ -44,7 +44,7 @@ Plugin 'Valloric/YouCompleteMe'
 "Plugin 'achimnol/python-syntax'
 "Plugin 'plasticboy/vim-markdown'
 "Plugin 'pangloss/vim-javascript'
-"Plugin 'webdesus/polymer-ide.vim'
+Plugin 'webdesus/polymer-ide.vim'
 autocmd BufWritePost *.py call Flake8()     " vim-flake8
 "let g:vim_markdown_folding_disabled = 1    " vim-markdown
 " YouCompleteMe
@@ -67,7 +67,7 @@ filetype plugin indent on   " required
 " ============================================================================
 " General
 autocmd! bufwritepost .vimrc source %   " auto reload .vimrc when saved
-autocmd FocusLost * wall
+autocmd BufLeave,FocusLost * wall
 " autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 "let python_highlight_all=1
 syntax on               " syntax highlighting
@@ -112,12 +112,13 @@ let mapleader = ","     " easier leader key
 " ============================================================================
 " Key bindings
 map <F2> <Esc>:w<CR>:!python3 %:p<CR>
-map <c-j> <c-w>j    " <ctrl - move> to move around the windows
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
-map <Leader>m gT                    " eaiser tab moving
-map <Leader>. gt
+noremap <c-j> <c-w>j    " <ctrl - move> to move around the windows
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
+noremap <c-h> <c-w>h
+noremap <Leader>m gT                    " eaiser tab moving
+noremap <Leader>. gt
+noremap tt <Esc>:tabnew<CR>
 vnoremap <c-c> "+y                  " quick copy to system clipboard
 vnoremap <Leader>s :sort<CR>        " map sort function to a key
 nnoremap <space> za
