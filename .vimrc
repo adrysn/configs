@@ -45,10 +45,10 @@ Plugin 'Valloric/YouCompleteMe'
 "Plugin 'plasticboy/vim-markdown'
 "Plugin 'pangloss/vim-javascript'
 Plugin 'webdesus/polymer-ide.vim'
-autocmd BufWritePost *.py call Flake8()     " vim-flake8
 "let g:vim_markdown_folding_disabled = 1    " vim-markdown
 " YouCompleteMe
 let g:ycm_python_binary_path = 'python'
+let g:ycm_autoclose_preview_window_after_completion = 1
 "let g:ycm_collect_identifiers_from_tags_files = 1
 "let g:ycm_use_ultisnips_completer = 1
 "let g:ycm_seed_identifiers_with_syntax = 1
@@ -81,6 +81,8 @@ set smartindent         " tab is converted to 4 spaces (Python convention)
 set tabstop=4
 set shiftwidth=0        " use tabstop value 
 set softtabstop=-1      " use shiftwidth value
+set list
+set listchars=tab:>-,trail:~
 " set textwidth=80
 set colorcolumn=80      " draw vertical line
 highlight ColorColumn ctermbg=black guibg=black
@@ -111,7 +113,7 @@ let mapleader = ","     " easier leader key
 
 " ============================================================================
 " Key bindings
-map <F2> <Esc>:w<CR>:!python3 %:p<CR>
+map <F2> <Esc>:w<CR>:!python %:p<CR>
 noremap <c-j> <c-w>j    " <ctrl - move> to move around the windows
 noremap <c-k> <c-w>k
 noremap <c-l> <c-w>l
@@ -122,6 +124,7 @@ noremap tt <Esc>:tabnew<CR>
 vnoremap <c-c> "+y                  " quick copy to system clipboard
 vnoremap <Leader>s :sort<CR>        " map sort function to a key
 nnoremap <space> za
+nnoremap <F5> :checktime<CR>
 
 
 " ============================================================================
