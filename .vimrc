@@ -82,10 +82,11 @@ set tabstop=4
 set shiftwidth=0        " use tabstop value 
 set softtabstop=-1      " use shiftwidth value
 set list
-set listchars=tab:>-,trail:~
+set listchars=tab:\┃\ ,space:·,trail:~,extends:>,precedes:<,nbsp:+
+highlight SpecialKey ctermfg=darkgrey guifg=#444444
 " set textwidth=80
 set colorcolumn=80      " draw vertical line
-highlight ColorColumn ctermbg=black guibg=black
+highlight ColorColumn ctermbg=black guibg=#222222
 set expandtab
 set smarttab
 set fileformat=unix
