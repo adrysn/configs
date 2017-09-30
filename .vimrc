@@ -2,6 +2,7 @@
 " Vundle
 set nocompatible        " required
 filetype off            " required
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -17,12 +18,14 @@ Plugin 'vim-airline/vim-airline'    " pretty status bar
 Plugin 'vim-airline/vim-airline-themes'
 set updatetime=250      " vim-gutter
 " vim-airline
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 1   " display buffer name
 let g:airline_theme='solarized'
-let g:airline_solarized_bg='dark'
+let g:airline_solarized_bg='light'
 
 "" Addons
 Plugin 'ctrlpvim/ctrlp.vim'     " finder
+Plugin 'jeetsukumaran/vim-buffergator'  " buffer management
+Plugin 'sjl/vitality.vim'       " make vim play nicely with iTerm 2 and tmux
 "Plugin 'scrooloose/nerdtree'   " file tree explorer
 "Plugin 'tpope/vim-vinegar'
 "Plugin 'tpope/vim-surround'    " quick parenthesis actions
@@ -36,12 +39,15 @@ let g:ctrlp_custom_ignore = {
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
+" buffergator
+let g:buffergator_viewport_split_policy = 'R'
+let g:buffergator_suppress_keymaps = 1
 
 "" Syntax
 Plugin 'nvie/vim-flake8'
 Plugin 'Valloric/YouCompleteMe'
 "Plugin 'scrooloose/syntastic'
-"Plugin 'achimnol/python-syntax'
+Plugin 'achimnol/python-syntax'
 "Plugin 'plasticboy/vim-markdown'
 "Plugin 'pangloss/vim-javascript'
 Plugin 'webdesus/polymer-ide.vim'
@@ -68,8 +74,8 @@ filetype plugin indent on   " required
 " General
 autocmd! bufwritepost .vimrc source %   " auto reload .vimrc when saved
 autocmd BufLeave,FocusLost * wall
-" autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-"let python_highlight_all=1
+
+let python_highlight_all=1
 syntax on               " syntax highlighting
 set encoding=utf-8      " use UTF-8
 colorscheme pablo
@@ -79,14 +85,14 @@ colorscheme pablo
 set autoindent          " indent when moving to the next line while writing code
 set smartindent         " tab is converted to 4 spaces (Python convention)
 set tabstop=4
-set shiftwidth=0        " use tabstop value 
+set shiftwidth=0        " use tabstop value
 set softtabstop=-1      " use shiftwidth value
 set list
 set listchars=tab:\┃\ ,space:·,trail:~,extends:>,precedes:<,nbsp:+
-highlight SpecialKey ctermfg=darkgrey guifg=#444444
+highlight SpecialKey ctermfg=darkgrey guifg=#cccccc
 " set textwidth=80
 set colorcolumn=80      " draw vertical line
-highlight ColorColumn ctermbg=black guibg=#222222
+highlight ColorColumn ctermbg=black guibg=#dddddd
 set expandtab
 set smarttab
 set fileformat=unix
@@ -119,13 +125,21 @@ noremap <c-j> <c-w>j    " <ctrl - move> to move around the windows
 noremap <c-k> <c-w>k
 noremap <c-l> <c-w>l
 noremap <c-h> <c-w>h
-noremap <Leader>m gT                    " eaiser tab moving
-noremap <Leader>. gt
-noremap tt <Esc>:tabnew<CR>
 vnoremap <c-c> "+y                  " quick copy to system clipboard
 vnoremap <Leader>s :sort<CR>        " map sort function to a key
 nnoremap <space> za
 nnoremap <F5> :checktime<CR>
+"noremap <Leader>m gT                " eaiser tab moving
+"noremap <Leader>. gt
+"noremap tt <Esc>:tabnew<CR>
+noremap <Leader>bb :CtrlPBuffer<CR>    " CtrlP
+noremap <Leader>bm :CtrlPMixed<CR>
+noremap <Leader>bs :CtrlPMRU<CR>
+noremap <Leader>jj :BuffergatorMruCyclePrev<CR>     " buffergator
+noremap <Leader>kk :BuffergatorMruCycleNext<CR>
+noremap <Leader>bl :BuffergatorOpen<CR>
+noremap <Leader>bt :enew<CR>
+noremap <Leader>bq :bp <BAR> bd #<CR>
 
 
 " ============================================================================
@@ -137,5 +151,5 @@ nnoremap <F5> :checktime<CR>
 "     \ set autoindent
 "     \ set fileformat=unix
 "" Web
-" au BufNewFile,BufRead *.js,*.html,*.css
-"     \ set tabstop=2
+au BufNewFile,BufRead *.js,*.html,*.css
+    \ set tabstop=2

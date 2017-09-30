@@ -17,3 +17,5 @@ fi
 source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 
 [ -s "/Users/adrysn/.scm_breeze/scm_breeze.sh" ] && source "/Users/adrysn/.scm_breeze/scm_breeze.sh"
+
+source ~/.iterm2_shell_integration.zsh
