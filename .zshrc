@@ -9,6 +9,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 alias vi="mvim -v"
 alias vim="mvim -v"
+alias ctags=/usr/local/bin/ctags
 
 if [ -f ~/.env_local ]; then
   source ~/.env_local

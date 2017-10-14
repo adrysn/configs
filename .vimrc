@@ -20,7 +20,7 @@ set updatetime=250      " vim-gutter
 """ vim-airline
 let g:airline_powerline_fonts = 1   " display buffer name
 let g:airline_theme='solarized'
-let g:airline_solarized_bg='light'
+let g:airline_solarized_bg='dark'
 
 "" Addons
 Plugin 'ctrlpvim/ctrlp.vim'     " finder
@@ -45,11 +45,18 @@ set wildignore+=*/coverage/*
 let g:buffergator_viewport_split_policy = 'R'
 let g:buffergator_suppress_keymaps = 1
 
+"" Editing
+Plugin 'jiangmiao/auto-pairs'   " auto-pair parenthesis, brackets
+Plugin 'tpope/vim-endwise'      " cleverly add end or endfunction
+Plugin 'tpope/vim-ragtag'       " set of maaping for html, xml, ...
+Plugin 'tpope/vim-surround'     " all about parens, brackets, quotes, ...
+Plugin 'tpope/vim-commentary'   " easier commenting
+
 "" Syntax
 Plugin 'nvie/vim-flake8'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'achimnol/python-syntax'
-Plugin 'webdesus/polymer-ide.vim'
+"Plugin 'webdesus/polymer-ide.vim'
 " YouCompleteMe
 let g:ycm_python_binary_path = 'python'
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -58,18 +65,26 @@ let g:ycm_complete_in_strings = 1
 call vundle#end()           " required
 filetype plugin indent on   " required
 
+"" Language specifics
+Plugin 'alfredodeza/pytest.vim' " inline pytesting
+
 
 " ============================================================================
 " General
 autocmd! bufwritepost .vimrc source %   " auto reload .vimrc when saved
 autocmd BufLeave,FocusLost * wall       " auto save when loose focus/buffer
-syntax enable           " syntax highlighting
+command! MakeTags !ctags -R .           " create tags file (need ctags)
 set encoding=utf-8      " use UTF-8
 set mouse=a             " use mouse
 let mapleader = ","     " easier leader key
 set nobackup            " disable stupid backup and swap files
 set nowritebackup
 set noswapfile
+set path+=**            " search down into subfolders
+
+"" Syntax
+syntax enable           " syntax highlighting
+let python_highlight_all=1
 
 "" Editing
 set autoindent          " indent when moving to the next line while coding
@@ -84,9 +99,16 @@ set history=500         " limit history/undo levels
 set undolevels=500
 set hlsearch            " highlight matches
 set ignorecase          " make search case insensitive
+set incsearch           " searching while typing
 set smartcase
 set clipboard=unnamed   " use system clipboard
 set pastetoggle=<F2>    " fix indent problem when pasting from ext. source
+
+" File browsing (netRW)
+let g:netrw_banner=0        " disable banner
+let g:netrw_browse_split=4  " open in prior window
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
 
 "" UI
 colorscheme pablo
@@ -94,9 +116,11 @@ highlight SpecialKey ctermfg=darkgrey guifg=#cccccc
 highlight ColorColumn ctermbg=black guibg=#dddddd
 set laststatus=2        " display status line always
 set number              " show line number
+set relativenumber      " use relative line number
 set colorcolumn=80      " draw vertical line
 set list                " show tabs, spaces, trailing blanks
 set listchars=tab:\┃\ ,space:·,trail:~,extends:>,precedes:<,nbsp:+
+set wildmenu            " tab completion for menu commands
 
 
 " ============================================================================
@@ -120,16 +144,18 @@ nnoremap <F5> :checktime<CR>
 vnoremap <c-c> "+y                  " quick copy to system clipboard
 vnoremap <Leader>s :sort<CR>        " map sort function to a key
 
+" Snippets
+nnoremap \html :-1read $HOME/.vim/.skeleton.html<CR>3jf>a
+
 
 " ============================================================================
 " IDE-like Setup
 "" Python
-autocmd BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set expandtab
-    \ set autoindent
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set expandtab |
+    \ set autoindent |
     \ set fileformat=unix
-let python_highlight_all=1
 
 "" Web
 au BufNewFile,BufRead *.js,*.html,*.css

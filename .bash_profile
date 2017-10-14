@@ -14,6 +14,8 @@ if [ -f ~/.env_local ]; then
     . ~/.env_local
 fi
 
+alias ctags=/usr/local/bin/ctags
+
 [ -s "/Users/adrysn/.scm_breeze/scm_breeze.sh" ] && source "/Users/adrysn/.scm_breeze/scm_breeze.sh"
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
