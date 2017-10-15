@@ -51,6 +51,9 @@ Plugin 'tpope/vim-endwise'      " cleverly add end or endfunction
 Plugin 'tpope/vim-ragtag'       " set of maaping for html, xml, ...
 Plugin 'tpope/vim-surround'     " all about parens, brackets, quotes, ...
 Plugin 'tpope/vim-commentary'   " easier commenting
+Plugin 'vim-scripts/ReplaceWithRegister'    " replace text with register
+Plugin 'christoomey/vim-sort-motion'    " sort paragraph alphabetically, etc
+Plugin 'christoomey/vim-system-copy'    " interact with system clipboard
 
 "" Syntax
 Plugin 'nvie/vim-flake8'
@@ -101,12 +104,10 @@ set hlsearch            " highlight matches
 set ignorecase          " make search case insensitive
 set incsearch           " searching while typing
 set smartcase
-set clipboard=unnamed   " use system clipboard
 set pastetoggle=<F2>    " fix indent problem when pasting from ext. source
 
 " File browsing (netRW)
 let g:netrw_banner=0        " disable banner
-let g:netrw_browse_split=4  " open in prior window
 let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
 
@@ -141,7 +142,6 @@ noremap <c-h> <c-w>h
 nnoremap <Leader><space> :nohlsearch<CR>
 nnoremap <space> za
 nnoremap <F5> :checktime<CR>
-vnoremap <c-c> "+y                  " quick copy to system clipboard
 vnoremap <Leader>s :sort<CR>        " map sort function to a key
 
 " Snippets
