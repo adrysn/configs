@@ -13,9 +13,10 @@ Plugin 'VundleVim/Vundle.vim'
 " add all your plugins here (note older versions of Vundle used Bundle instead of Plugins)
 
 "" Visual
-Plugin 'airblade/vim-gitgutter'     " shows a git diff in the gutter
+Plugin 'altercation/vim-colors-solarized'   " solarized theme
 Plugin 'vim-airline/vim-airline'    " pretty status bar
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'airblade/vim-gitgutter'     " shows a git diff in the gutter
 set updatetime=250      " vim-gutter
 """ vim-airline
 let g:airline_powerline_fonts = 1   " display buffer name
@@ -42,18 +43,18 @@ set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
 " buffergator
-let g:buffergator_viewport_split_policy = 'R'
 let g:buffergator_suppress_keymaps = 1
 
 "" Editing
 Plugin 'jiangmiao/auto-pairs'   " auto-pair parenthesis, brackets
 Plugin 'tpope/vim-endwise'      " cleverly add end or endfunction
-Plugin 'tpope/vim-ragtag'       " set of maaping for html, xml, ...
 Plugin 'tpope/vim-surround'     " all about parens, brackets, quotes, ...
 Plugin 'tpope/vim-commentary'   " easier commenting
 Plugin 'vim-scripts/ReplaceWithRegister'    " replace text with register
 Plugin 'christoomey/vim-sort-motion'    " sort paragraph alphabetically, etc
 Plugin 'christoomey/vim-system-copy'    " interact with system clipboard
+Plugin 'kana/vim-textobj-user'          " customize text obj
+Plugin 'kana/vim-textobj-indent'        " indent block as a text obj
 
 "" Syntax
 Plugin 'nvie/vim-flake8'
@@ -65,18 +66,46 @@ let g:ycm_python_binary_path = 'python'
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_complete_in_strings = 1
 
+"" Language specifics
+Plugin 'alfredodeza/pytest.vim' " inline pytesting
+
 call vundle#end()           " required
 filetype plugin indent on   " required
 
-"" Language specifics
-Plugin 'alfredodeza/pytest.vim' " inline pytesting
+
+" ============================================================================
+"" UI
+syntax enable           " syntax highlighting
+let opacity=100
+let blur=0
+let python_highlight_all=1
+
+if has("gui_running")
+    if has("gui_macvim")
+        set guifont=Hack:h13
+        set background=dark
+        let g:solarized_visibility="low"
+        colorscheme solarized
+    endif
+else
+endif
+
+highlight SpecialKey ctermfg=darkgrey guifg=#424242
+highlight ColorColumn ctermbg=black guibg=#053440
+set guioptions=         " no scroll bars
+set laststatus=2        " display status line always
+set number              " show line number
+set relativenumber      " use relative line number
+set colorcolumn=80      " draw vertical line
+set list                " show tabs, spaces, trailing blanks
+set listchars=tab:\┃\ ,space:·,trail:~,extends:>,precedes:<,nbsp:+
+set wildmenu            " tab completion for menu commands
 
 
 " ============================================================================
 " General
 autocmd! bufwritepost .vimrc source %   " auto reload .vimrc when saved
 autocmd BufLeave,FocusLost * wall       " auto save when loose focus/buffer
-command! MakeTags !ctags -R .           " create tags file (need ctags)
 set encoding=utf-8      " use UTF-8
 set mouse=a             " use mouse
 let mapleader = ","     " easier leader key
@@ -84,10 +113,6 @@ set nobackup            " disable stupid backup and swap files
 set nowritebackup
 set noswapfile
 set path+=**            " search down into subfolders
-
-"" Syntax
-syntax enable           " syntax highlighting
-let python_highlight_all=1
 
 "" Editing
 set autoindent          " indent when moving to the next line while coding
@@ -111,22 +136,11 @@ let g:netrw_banner=0        " disable banner
 let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
 
-"" UI
-colorscheme pablo
-highlight SpecialKey ctermfg=darkgrey guifg=#cccccc
-highlight ColorColumn ctermbg=black guibg=#dddddd
-set laststatus=2        " display status line always
-set number              " show line number
-set relativenumber      " use relative line number
-set colorcolumn=80      " draw vertical line
-set list                " show tabs, spaces, trailing blanks
-set listchars=tab:\┃\ ,space:·,trail:~,extends:>,precedes:<,nbsp:+
-set wildmenu            " tab completion for menu commands
-
 
 " ============================================================================
 " Key bindings
 map <F2> <Esc>:w<CR>:!python %:p<CR>
+inoremap jk <Esc>
 noremap <Leader>bb :CtrlPBuffer<CR>    " CtrlP
 noremap <Leader>bm :CtrlPMixed<CR>
 noremap <Leader>bs :CtrlPMRU<CR>
@@ -146,6 +160,7 @@ vnoremap <Leader>s :sort<CR>        " map sort function to a key
 
 " Snippets
 nnoremap \html :-1read $HOME/.vim/.skeleton.html<CR>3jf>a
+nnoremap \pywait oimport time; time.sleep(5000)<ESC>
 
 
 " ============================================================================
