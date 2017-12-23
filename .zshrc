@@ -17,12 +17,11 @@ source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 
 source ~/.iterm2_shell_integration.zsh
 
+export PATH="$HOME/bin:$PATH"
+
 # Node.js
 export PATH="$HOME/.npm-packages/bin:$PATH"
 export PATH="$PATH:`yarn global bin`"
-
-# rabbitmq
-PATH=$PATH:/usr/local/sbin
 
 # pyenv / pyenv-virtualenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -33,3 +32,5 @@ eval "$(pyenv virtualenv-init -)"
 # go
 export PATH=$PATH:/usr/local/go/bin:/Users/adrysn/Develop/go/bin
 export GOPATH=$HOME/Develop/go
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

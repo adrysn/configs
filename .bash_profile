@@ -23,12 +23,11 @@ fi
 
 source ~/.iterm2_shell_integration.zsh
 
+export PATH="$HOME/bin:$PATH"
+
 # Node.js
 export PATH="$HOME/.npm-packages/bin:$PATH"
 export PATH="$PATH:`yarn global bin`"
-
-# rabbitmq
-PATH=$PATH:/usr/local/sbin
 
 # pyenv / pyenv-virtualenv
 export PYENV_ROOT="$HOME/.pyenv"
