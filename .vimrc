@@ -14,19 +14,29 @@ Plugin 'VundleVim/Vundle.vim'
 
 "" Visual
 Plugin 'altercation/vim-colors-solarized'   " solarized theme
+Plugin 'rakr/vim-one'               " one-light, one-dark color schemes
 Plugin 'vim-airline/vim-airline'    " pretty status bar
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'     " shows a git diff in the gutter
 set updatetime=250      " vim-gutter
 """ vim-airline
 let g:airline_powerline_fonts = 1   " display buffer name
-let g:airline_theme='solarized'
-let g:airline_solarized_bg='dark'
+let g:airline_theme='one'
+" let g:airline_theme='solarized'
+" let g:airline_solarized_bg='dark'
 
 "" Addons
+Plugin 'scrooloose/nerdtree'    " tree explorer
+Plugin 'jremmen/vim-ripgrep'
 Plugin 'ctrlpvim/ctrlp.vim'     " finder
+" Plugin 'junegunn/fzf'           " fuzzy finder (rendering issues in MacVim)
+" Plugin 'junegunn/fzf.vim'
 Plugin 'jeetsukumaran/vim-buffergator'  " buffer management
 Plugin 'sjl/vitality.vim'       " make vim play nicely with iTerm 2 and tmux
+" nerdtree
+map <C-n> :NERDTreeToggle<CR>
+" vim-ripgrep
+let g:rg_highlight = 'true'
 " ctrlp.vim
 let g:ctrlp_user_command = [
     \ '.git/',
@@ -44,6 +54,7 @@ set wildignore+=*_build/*
 set wildignore+=*/coverage/*
 " buffergator
 let g:buffergator_suppress_keymaps = 1
+let g:buffergator_viewport_split_policy = "B"
 
 "" Editing
 Plugin 'jiangmiao/auto-pairs'   " auto-pair parenthesis, brackets
@@ -67,7 +78,7 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_complete_in_strings = 1
 
 "" Language specifics
-Plugin 'alfredodeza/pytest.vim' " inline pytesting
+Plugin 'Vimjas/vim-python-pep8-indent'  " indentation comply with PEP8
 
 call vundle#end()           " required
 filetype plugin indent on   " required
@@ -85,13 +96,14 @@ if has("gui_running")
         set guifont=Hack:h13
         set background=dark
         let g:solarized_visibility="low"
-        colorscheme solarized
+        " colorscheme solarized
+        colorscheme one
     endif
 else
 endif
 
 highlight SpecialKey ctermfg=darkgrey guifg=#424242
-highlight ColorColumn ctermbg=black guibg=#053440
+highlight ColorColumn ctermbg=darkgrey guibg=#453440
 set guioptions=         " no scroll bars
 set laststatus=2        " display status line always
 set number              " show line number

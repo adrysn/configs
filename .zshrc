@@ -6,6 +6,7 @@ export EDITOR="$VISUAL"
 alias vi="mvim -v"
 alias vim="mvim -v"
 alias git=hub
+alias rg="rg --max-columns 200"
 
 if [ -f ~/.env_local ]; then
   source ~/.env_local
@@ -33,4 +34,6 @@ eval "$(pyenv virtualenv-init -)"
 export PATH=$PATH:/usr/local/go/bin:/Users/adrysn/Develop/go/bin
 export GOPATH=$HOME/Develop/go
 
+# fzf & ripgrep
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_CTRL_T_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
