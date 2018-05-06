@@ -33,6 +33,7 @@ Plugin 'ctrlpvim/ctrlp.vim'     " finder
 " Plugin 'junegunn/fzf.vim'
 Plugin 'jeetsukumaran/vim-buffergator'  " buffer management
 Plugin 'sjl/vitality.vim'       " make vim play nicely with iTerm 2 and tmux
+Plugin 'Konfekt/FastFold'       " speed up vim's folding
 " nerdtree
 map <C-n> :NERDTreeToggle<CR>
 " vim-ripgrep
@@ -66,11 +67,13 @@ Plugin 'christoomey/vim-sort-motion'    " sort paragraph alphabetically, etc
 Plugin 'christoomey/vim-system-copy'    " interact with system clipboard
 Plugin 'kana/vim-textobj-user'          " customize text obj
 Plugin 'kana/vim-textobj-indent'        " indent block as a text obj
+Plugin 'editorconfig/editorconfig-vim'  " editorconfig support
 
 "" Syntax
 Plugin 'nvie/vim-flake8'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'achimnol/python-syntax'
+Plugin 'pangloss/vim-javascript'
 "Plugin 'webdesus/polymer-ide.vim'
 " YouCompleteMe
 let g:ycm_python_binary_path = 'python'
@@ -79,6 +82,7 @@ let g:ycm_complete_in_strings = 1
 
 "" Language specifics
 Plugin 'Vimjas/vim-python-pep8-indent'  " indentation comply with PEP8
+Plugin 'tmhedberg/SimpylFold'           " better python folding
 
 call vundle#end()           " required
 filetype plugin indent on   " required
@@ -102,13 +106,15 @@ if has("gui_running")
 else
 endif
 
-highlight SpecialKey ctermfg=darkgrey guifg=#424242
 highlight ColorColumn ctermbg=darkgrey guibg=#453440
+highlight Folded guifg=#8f96a3 guibg=#454a54
+highlight SpecialKey ctermfg=darkgrey guifg=#424242
 set guioptions=         " no scroll bars
 set laststatus=2        " display status line always
 set number              " show line number
 set relativenumber      " use relative line number
 set colorcolumn=80      " draw vertical line
+set nowrap              " I don't like line wrapping
 set list                " show tabs, spaces, trailing blanks
 set listchars=tab:\┃\ ,space:·,trail:~,extends:>,precedes:<,nbsp:+
 set wildmenu            " tab completion for menu commands
@@ -185,5 +191,5 @@ au BufNewFile,BufRead *.py
     \ set fileformat=unix
 
 "" Web
-au BufNewFile,BufRead *.js,*.html,*.css
-    \ set tabstop=2
+" au BufNewFile,BufRead *.js,*.html,*.css
+"     \ set tabstop=2

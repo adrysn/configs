@@ -18,7 +18,7 @@ source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 
 source ~/.iterm2_shell_integration.zsh
 
-export PATH="$HOME/bin:$PATH"
+export PATH="/usr/local/bin:$HOME/bin:$PATH"
 
 # Node.js
 export PATH="$HOME/.npm-packages/bin:$PATH"
