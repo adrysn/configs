@@ -72,17 +72,28 @@ Plugin 'editorconfig/editorconfig-vim'  " editorconfig support
 "" Syntax
 Plugin 'nvie/vim-flake8'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 Plugin 'achimnol/python-syntax'
 Plugin 'pangloss/vim-javascript'
-"Plugin 'webdesus/polymer-ide.vim'
+Plugin 'webdesus/polymer-ide.vim'
 " YouCompleteMe
 let g:ycm_python_binary_path = 'python'
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
+" ultisnips
+" let g:UltiSnipsJumpForwardTrigger = "<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
+" let g:UltiSnipsListSnippets = "<c-k>"
+" let g:UltiSnipsEditSplit = "vertical"
 
 "" Language specifics
 Plugin 'Vimjas/vim-python-pep8-indent'  " indentation comply with PEP8
 Plugin 'tmhedberg/SimpylFold'           " better python folding
+Plugin 'tweekmonster/django-plus.vim'
 
 call vundle#end()           " required
 filetype plugin indent on   " required
@@ -99,16 +110,19 @@ if has("gui_running")
     if has("gui_macvim")
         set guifont=Hack:h13
         set background=dark
-        let g:solarized_visibility="low"
-        " colorscheme solarized
-        colorscheme one
     endif
+    let g:solarized_visibility="low"
+    " colorscheme solarized
+    colorscheme one
 else
+    colorscheme one
 endif
 
-highlight ColorColumn ctermbg=darkgrey guibg=#453440
-highlight Folded guifg=#8f96a3 guibg=#454a54
-highlight SpecialKey ctermfg=darkgrey guifg=#424242
+highlight Normal ctermbg=234
+highlight ColorColumn ctermbg=236 guibg=#453440
+highlight Folded guifg=#8f96a3 guibg=#454a54 ctermbg=236 ctermfg=245
+highlight SpecialKey ctermfg=238 guifg=#424242
+highlight Pmenu ctermfg=15 ctermbg=0  " YouCompleteMe popup color
 set guioptions=         " no scroll bars
 set laststatus=2        " display status line always
 set number              " show line number
@@ -131,6 +145,7 @@ set nobackup            " disable stupid backup and swap files
 set nowritebackup
 set noswapfile
 set path+=**            " search down into subfolders
+set lazyredraw ttyfast
 
 "" Editing
 set autoindent          " indent when moving to the next line while coding
