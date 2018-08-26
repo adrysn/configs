@@ -27,6 +27,7 @@ let g:airline_theme='one'
 
 "" Addons
 Plugin 'scrooloose/nerdtree'    " tree explorer
+Plugin 'vimplugin/project.vim'  " ide-like navigator
 Plugin 'jremmen/vim-ripgrep'
 Plugin 'ctrlpvim/ctrlp.vim'     " finder
 " Plugin 'junegunn/fzf'           " fuzzy finder (rendering issues in MacVim)
@@ -59,9 +60,11 @@ let g:buffergator_viewport_split_policy = "B"
 
 "" Editing
 Plugin 'jiangmiao/auto-pairs'   " auto-pair parenthesis, brackets
+Plugin 'alvan/vim-closetag'     " auto-close html tags
 Plugin 'tpope/vim-endwise'      " cleverly add end or endfunction
 Plugin 'tpope/vim-surround'     " all about parens, brackets, quotes, ...
 Plugin 'tpope/vim-commentary'   " easier commenting
+Plugin 'tpope/vim-fugitive'     " Git wrapper
 Plugin 'vim-scripts/ReplaceWithRegister'    " replace text with register
 Plugin 'christoomey/vim-sort-motion'    " sort paragraph alphabetically, etc
 Plugin 'christoomey/vim-system-copy'    " interact with system clipboard
@@ -85,10 +88,10 @@ let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 " ultisnips
-" let g:UltiSnipsJumpForwardTrigger = "<c-j>"
-" let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
-" let g:UltiSnipsListSnippets = "<c-k>"
-" let g:UltiSnipsEditSplit = "vertical"
+let g:UltiSnipsExpandTrigger       = "<c-j>"
+let g:UltiSnipsJumpForwardTrigger = "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-l>"
+let g:UltiSnipsListSnippets = "<c-k>"
 
 "" Language specifics
 Plugin 'Vimjas/vim-python-pep8-indent'  " indentation comply with PEP8
@@ -108,7 +111,7 @@ let python_highlight_all=1
 
 if has("gui_running")
     if has("gui_macvim")
-        set guifont=Hack:h13
+        set guifont=Hack:h14
         set background=dark
     endif
     let g:solarized_visibility="low"
