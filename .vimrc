@@ -26,7 +26,6 @@ let g:airline_theme='one'
 " let g:airline_solarized_bg='dark'
 
 "" Addons
-Plugin 'scrooloose/nerdtree'    " tree explorer
 Plugin 'vimplugin/project.vim'  " ide-like navigator
 Plugin 'jremmen/vim-ripgrep'
 Plugin 'ctrlpvim/ctrlp.vim'     " finder
@@ -35,8 +34,11 @@ Plugin 'ctrlpvim/ctrlp.vim'     " finder
 Plugin 'jeetsukumaran/vim-buffergator'  " buffer management
 Plugin 'sjl/vitality.vim'       " make vim play nicely with iTerm 2 and tmux
 Plugin 'Konfekt/FastFold'       " speed up vim's folding
-" nerdtree
-map <C-n> :NERDTreeToggle<CR>
+" project.vim
+let g:proj_window_width=30
+let g:proj_window_increment=70
+let g:proj_flags="bgimst"
+nmap <silent> <C-n> <Plug>ToggleProject
 " vim-ripgrep
 let g:rg_highlight = 'true'
 " ctrlp.vim
@@ -97,6 +99,7 @@ let g:UltiSnipsListSnippets = "<c-k>"
 Plugin 'Vimjas/vim-python-pep8-indent'  " indentation comply with PEP8
 Plugin 'tmhedberg/SimpylFold'           " better python folding
 Plugin 'tweekmonster/django-plus.vim'
+Plugin 'JarrodCTaylor/vim-python-test-runner'   " run tests swiftly
 
 call vundle#end()           " required
 filetype plugin indent on   " required
@@ -168,9 +171,11 @@ set smartcase
 set pastetoggle=<F2>    " fix indent problem when pasting from ext. source
 
 " File browsing (netRW)
-let g:netrw_banner=0        " disable banner
-let g:netrw_altv=1          " open splits to the right
-let g:netrw_liststyle=3     " tree view
+let g:netrw_altv = 1
+let g:netrw_banner=0            " disable banner
+let g:netrw_browse_split=4
+let g:netrw_liststyle=3         " tree view
+let g:netrw_winsize = 30        " width
 
 
 " ============================================================================
@@ -180,6 +185,7 @@ inoremap jk <Esc>
 noremap <Leader>bb :CtrlPBuffer<CR>    " CtrlP
 noremap <Leader>bm :CtrlPMixed<CR>
 noremap <Leader>bs :CtrlPMRU<CR>
+noremap <Leader>b. :CtrlPTag<CR>
 noremap <Leader>jj :BuffergatorMruCyclePrev<CR>     " buffergator
 noremap <Leader>kk :BuffergatorMruCycleNext<CR>
 noremap <Leader>bl :BuffergatorOpen<CR>
@@ -189,6 +195,8 @@ noremap <c-j> <c-w>j    " <ctrl - move> to move around the windows
 noremap <c-k> <c-w>k
 noremap <c-l> <c-w>l
 noremap <c-h> <c-w>h
+nnoremap gev :e $MYVIMRC<CR>
+nnoremap gsv :so $MYVIMRC<CR>
 nnoremap <Leader><space> :nohlsearch<CR>
 nnoremap <space> za
 nnoremap <F5> :checktime<CR>
