@@ -121,6 +121,7 @@ if has("gui_running")
     " colorscheme solarized
     colorscheme one
 else
+    " colorscheme solarized
     colorscheme one
 endif
 
