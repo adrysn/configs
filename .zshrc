@@ -3,10 +3,9 @@ export LANG=en_US.UTF-8
 export VISUAL="mvim -v"
 export EDITOR="$VISUAL"
 
-alias vi="mvim -v"
-alias vim="mvim -v"
-alias git=hub
-alias rg="rg --max-columns 200"
+if [ -f ~/.bash_aliases ]; then
+    source ~/.bash_aliases
+fi
 
 if [ -f ~/.env_local ]; then
   source ~/.env_local

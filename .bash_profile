@@ -7,10 +7,6 @@ export LANG=en_US.UTF-8
 export VISUAL="mvim -v"
 export EDITOR="$VISUAL"
 
-alias vi="mvim -v"
-alias vim="mvim -v"
-alias git=hub
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
