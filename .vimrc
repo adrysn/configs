@@ -77,11 +77,11 @@ Plugin 'editorconfig/editorconfig-vim'  " editorconfig support
 "" Syntax
 Plugin 'nvie/vim-flake8'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'SirVer/ultisnips'
+" Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'achimnol/python-syntax'
 Plugin 'pangloss/vim-javascript'
-Plugin 'webdesus/polymer-ide.vim'
+" Plugin 'webdesus/polymer-ide.vim'
 " YouCompleteMe
 let g:ycm_python_binary_path = 'python'
 let g:ycm_autoclose_preview_window_after_completion = 1
