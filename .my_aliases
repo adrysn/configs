@@ -1,0 +1,12 @@
+alias vi="mvim -v"
+alias vim="mvim"
+alias git=hub
+alias rg="rg --max-columns 200"
+
+alias fx="firefox --new-instance --profile $(mktemp -d)"
+alias bai="backend.ai"
+
+# List useful examples for a unix command
+function cheat() {
+    curl cht.sh/$1
+}
