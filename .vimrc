@@ -5,6 +5,7 @@ filetype off            " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+if isdirectory(expand('~/.vim/bundle/Vundle.vim'))
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 " call vundle#begin('~/some/path/here')
@@ -75,12 +76,13 @@ Plugin 'kana/vim-textobj-indent'        " indent block as a text obj
 Plugin 'editorconfig/editorconfig-vim'  " editorconfig support
 
 "" Syntax
-Plugin 'nvie/vim-flake8'
-Plugin 'Valloric/YouCompleteMe'
-" Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
 Plugin 'achimnol/python-syntax'
+Plugin 'honza/vim-snippets'
+Plugin 'nvie/vim-flake8'
 Plugin 'pangloss/vim-javascript'
+" Plugin 'SirVer/ultisnips'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'w0rp/ale'
 " Plugin 'webdesus/polymer-ide.vim'
 " YouCompleteMe
 let g:ycm_python_binary_path = 'python'
@@ -102,6 +104,7 @@ Plugin 'tweekmonster/django-plus.vim'
 Plugin 'JarrodCTaylor/vim-python-test-runner'   " run tests swiftly
 
 call vundle#end()           " required
+endif
 filetype plugin indent on   " required
 
 

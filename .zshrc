@@ -1,5 +1,5 @@
 if [ -f ~/.my_envs ]; then
-  source ~/.my_envs
+    source ~/.my_envs
 fi
 
 if [ -f ~/.my_aliases ]; then
