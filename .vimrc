@@ -116,17 +116,15 @@ let blur=0
 let python_highlight_all=1
 
 if has("gui_running")
+    set guifont=Hack:h14
+    set background=dark
     if has("gui_macvim")
-        set guifont=Hack:h14
-        set background=dark
-    endif
-    if isdirectory(expand('~/.vim/bundle/Vundle.vim'))
         let g:solarized_visibility="low"
         " colorscheme solarized
         colorscheme one
     endif
 else
-    if isdirectory(expand('~/.vim/bundle/Vundle.vim'))
+    if has("gui_macvim")
         " colorscheme solarized
         colorscheme one
     endif
