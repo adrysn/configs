@@ -120,12 +120,16 @@ if has("gui_running")
         set guifont=Hack:h14
         set background=dark
     endif
-    let g:solarized_visibility="low"
-    " colorscheme solarized
-    colorscheme one
+    if isdirectory(expand('~/.vim/bundle/Vundle.vim'))
+        let g:solarized_visibility="low"
+        " colorscheme solarized
+        colorscheme one
+    endif
 else
-    " colorscheme solarized
-    colorscheme one
+    if isdirectory(expand('~/.vim/bundle/Vundle.vim'))
+        " colorscheme solarized
+        colorscheme one
+    endif
 endif
 
 highlight Normal ctermbg=234
