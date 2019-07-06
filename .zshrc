@@ -1,13 +1,10 @@
-if [ -f ~/.my_envs ]; then
-    source ~/.my_envs
-fi
-
-if [ -f ~/.my_aliases ]; then
-    source ~/.my_aliases
-fi
-
+export SHELL=/usr/local/bin/zsh
 source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 
-[ -s "/Users/adrysn/.scm_breeze/scm_breeze.sh" ] && source "/Users/adrysn/.scm_breeze/scm_breeze.sh"
+if [ -f ~/.my_envs.sh ] ; then source $HOME/.my_envs.sh ; fi
+if [ -f ~/.my_aliases.sh ] ; then source $HOME/.my_aliases.sh ; fi
 
-source ~/.iterm2_shell_integration.zsh
+bindkey -v
+
+# added by travis gem
+[ -f /Users/adrysn/.travis/travis.sh ] && source /Users/adrysn/.travis/travis.sh

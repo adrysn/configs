@@ -45,15 +45,28 @@ if [[ $BACKENDAI == 1 ]] ; then
             tmux send-keys -t 'backendai:1' 'python -m ai.backend.gateway.server'
         tmux new-window -d -n agent -c ~/Develop/backend.ai/backend.ai-dev/agent
             tmux send-keys -t 'backendai:2' 'cd .' Enter
-            tmux send-keys -t 'backendai:2' 'python -m ai.backend.gateway.server'
+            tmux send-keys -t 'backendai:2' 'python -m ai.backend.agent.server'
+        tmux new-window -d -n client-superadmin -c ~/Develop/backend.ai/backend.ai-dev/client-py
+            tmux send-keys -t 'backendai:3' 'cd .' Enter
+            tmux send-keys -t 'backendai:3' 'source set_config.sh superadmin'
+        tmux new-window -d -n client-admin -c ~/Develop/backend.ai/backend.ai-dev/client-py
+            tmux send-keys -t 'backendai:4' 'cd .' Enter
+            tmux send-keys -t 'backendai:4' 'source set_config.sh admin'
+        tmux new-window -d -n client-user -c ~/Develop/backend.ai/backend.ai-dev/client-py
+            tmux send-keys -t 'backendai:5' 'cd .' Enter
+            tmux send-keys -t 'backendai:5' 'source set_config.sh user'
+        tmux new-window -d -n dbshell -c ~/Develop/backend.ai/backend.ai-dev/manager
+            tmux send-keys -t 'backendai:6' 'cd .' Enter
+            tmux send-keys -t 'backendai:6' 'python -m ai.backend.manager.cli dbshell' Enter
+            tmux send-keys -t 'backendai:6' '\c backend' Enter
 fi
 
 # console
 if [[ $CONSOLE == 1 ]] ; then
     tmux new-session -d -s console -n app -c ~/Develop/backend.ai/backend.ai-dev/console
-        tmux send-keys -t 'console:0' 'make test_web' Enter
+        tmux send-keys -t 'console:0' 'nvm use 10.15.3 ; make test_web' Enter
         tmux new-window -d -n proxy -c ~/Develop/backend.ai/backend.ai-dev/console
-            tmux send-keys -t 'console:1' 'make proxy' Enter
+            tmux send-keys -t 'console:1' 'nvm use 10.15.3 ; make proxy' Enter
 fi
 
 # manager-hub
