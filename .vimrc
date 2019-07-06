@@ -79,6 +79,7 @@ Plugin 'editorconfig/editorconfig-vim'  " editorconfig support
 Plugin 'achimnol/python-syntax'
 Plugin 'honza/vim-snippets'
 Plugin 'nvie/vim-flake8'
+Plugin 'jonsmithers/vim-html-template-literals' " highlight JS literal string
 Plugin 'pangloss/vim-javascript'
 " Plugin 'SirVer/ultisnips'
 Plugin 'Valloric/YouCompleteMe'
@@ -96,6 +97,8 @@ let g:UltiSnipsExpandTrigger       = "<c-j>"
 let g:UltiSnipsJumpForwardTrigger = "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-l>"
 let g:UltiSnipsListSnippets = "<c-k>"
+" vim-html-template-literals
+let g:html_indent_style1 = "inc"
 
 "" Language specifics
 Plugin 'Vimjas/vim-python-pep8-indent'  " indentation comply with PEP8
@@ -119,7 +122,7 @@ if has("gui_running")
     set guifont=Hack:h14
     set background=dark
     if has("gui_macvim")
-        let g:solarized_visibility="low"
+        " let g:solarized_visibility="low"
         " colorscheme solarized
         colorscheme one
     endif
@@ -197,6 +200,7 @@ noremap <Leader>kk :BuffergatorMruCycleNext<CR>
 noremap <Leader>bl :BuffergatorOpen<CR>
 noremap <Leader>bt :enew<CR>
 noremap <Leader>bq :bp <BAR> bd #<CR>
+noremap <Leader>gs :bp <BAR> bd #<CR>
 noremap <c-j> <c-w>j    " <ctrl - move> to move around the windows
 noremap <c-k> <c-w>k
 noremap <c-l> <c-w>l
@@ -207,6 +211,18 @@ nnoremap <Leader><space> :nohlsearch<CR>
 nnoremap <space> za
 nnoremap <F5> :checktime<CR>
 vnoremap <Leader>s :sort<CR>        " map sort function to a key
+nnoremap <Leader>gs :Gstatus<CR>    " git shortcuts
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gb :Gblame<CR>
+" nnoremap <Leader>gL :exe ':!cd ' . expand('%:p:h') . '; git la'<CR>
+" nnoremap <Leader>gl :exe ':!cd ' . expand('%:p:h') . '; git las'<CR>
+" nnoremap <Leader>gh :Silent Glog<CR>
+" nnoremap <Leader>gH :Silent Glog<CR>:set nofoldenable<CR>
+nnoremap <Leader>gr :Gread<CR>
+nnoremap <Leader>gw :Gwrite<CR>
+" nnoremap <Leader>gp :Git push<CR>
+" nnoremap <Leader>g- :Silent Git stash<CR>:e<CR>
+" nnoremap <Leader>g+ :Silent Git stash pop<CR>:e<CR>
 
 " Snippets
 nnoremap \html :-1read $HOME/.vim/.skeleton.html<CR>3jf>a
