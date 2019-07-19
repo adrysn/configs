@@ -84,6 +84,7 @@ Plugin 'pangloss/vim-javascript'
 " Plugin 'SirVer/ultisnips'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'w0rp/ale'
+Plugin 'cespare/vim-toml'
 " Plugin 'webdesus/polymer-ide.vim'
 " YouCompleteMe
 let g:ycm_python_binary_path = 'python'
@@ -226,7 +227,7 @@ nnoremap <Leader>gw :Gwrite<CR>
 
 " Snippets
 nnoremap \html :-1read $HOME/.vim/.skeleton.html<CR>3jf>a
-nnoremap \pywait oimport time; time.sleep(5000)<ESC>
+nnoremap \pywait import time; time.sleep(5000)<ESC>
 
 
 " ============================================================================

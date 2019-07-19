@@ -48,17 +48,16 @@ if [[ $BACKENDAI == 1 ]] ; then
             tmux send-keys -t 'backendai:2' 'python -m ai.backend.agent.server'
         tmux new-window -d -n client-superadmin -c ~/Develop/backend.ai/backend.ai-dev/client-py
             tmux send-keys -t 'backendai:3' 'cd .' Enter
-            tmux send-keys -t 'backendai:3' 'source set_config.sh superadmin'
+            tmux send-keys -t 'backendai:3' 'source set_config.sh superadmin' Enter
         tmux new-window -d -n client-admin -c ~/Develop/backend.ai/backend.ai-dev/client-py
             tmux send-keys -t 'backendai:4' 'cd .' Enter
-            tmux send-keys -t 'backendai:4' 'source set_config.sh admin'
+            tmux send-keys -t 'backendai:4' 'source set_config.sh admin' Enter
         tmux new-window -d -n client-user -c ~/Develop/backend.ai/backend.ai-dev/client-py
             tmux send-keys -t 'backendai:5' 'cd .' Enter
-            tmux send-keys -t 'backendai:5' 'source set_config.sh user'
+            tmux send-keys -t 'backendai:5' 'source set_config.sh user' Enter
         tmux new-window -d -n dbshell -c ~/Develop/backend.ai/backend.ai-dev/manager
             tmux send-keys -t 'backendai:6' 'cd .' Enter
-            tmux send-keys -t 'backendai:6' 'python -m ai.backend.manager.cli dbshell' Enter
-            tmux send-keys -t 'backendai:6' '\c backend' Enter
+            tmux send-keys -t 'backendai:6' 'python -m ai.backend.manager.cli dbshell'
 fi
 
 # console

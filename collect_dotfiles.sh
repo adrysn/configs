@@ -1,5 +1,6 @@
 \cp -f ~/.bash_profile .
 \cp -f ~/.my_aliases.sh .
+\cp -f ~/.my_envs.sh .
 \cp -f ~/.zpreztorc .
 \cp -f ~/.zshrc .
 \cp -f ~/.ctags .

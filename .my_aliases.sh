@@ -2,10 +2,10 @@ if [ -x "$(command -v mvim)" ]; then
     alias vi="mvim -v"
     alias vim="mvim"
 fi
-alias rg="rg --max-columns 200"
+[ -x "$(command -v rg)" ] && alias rg="rg --max-columns 200"
 
-alias fx="firefox --new-instance --profile $(mktemp -d)"
-alias bai="backend.ai"
+[ -x "$(command -v firefox)" ] && alias fx="firefox --new-instance --profile $(mktemp -d)"
+[ -x "$(command -v backend.ai)" ] && alias bai="backend.ai"
 
 # Git
 # Most git aliases are turned off in favor of scm_breeze
