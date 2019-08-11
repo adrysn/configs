@@ -66,6 +66,9 @@ if [[ $CONSOLE == 1 ]] ; then
         tmux send-keys -t 'console:0' 'nvm use 10.15.3 ; make test_web' Enter
         tmux new-window -d -n proxy -c ~/Develop/backend.ai/backend.ai-dev/console
             tmux send-keys -t 'console:1' 'nvm use 10.15.3 ; make proxy' Enter
+        tmux new-window -d -n console-server -c ~/Develop/backend.ai/backend.ai-dev/console-server
+            tmux send-keys -t 'console:2' 'cd .' Enter
+            tmux send-keys -t 'console:2' 'python -m ai.backend.console.server' Enter
 fi
 
 # manager-hub

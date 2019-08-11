@@ -126,10 +126,14 @@ if has("gui_running")
         " let g:solarized_visibility="low"
         " colorscheme solarized
         colorscheme one
+    else
+        colorscheme one
     endif
 else
     if has("gui_macvim")
         " colorscheme solarized
+        colorscheme one
+    else
         colorscheme one
     endif
 endif

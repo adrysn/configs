@@ -1,6 +1,12 @@
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export VISUAL="mvim -v"
+if [ -x "$(command -v mvim)" ]; then
+    export VISUAL="mvim -v"
+elif [ -x "$(command -v vim)" ]; then
+    export VISUAL="vim -v"
+else
+    export VISUAL="vi"
+fi
 export EDITOR="$VISUAL"
 
 export PATH="/usr/local/bin:$HOME/bin:$PATH"
