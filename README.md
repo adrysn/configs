@@ -1,7 +1,12 @@
-# dotfiles
+# configs
 
-My dot files for safe keeping.
+My configs for safe keeping.
 
+Directory structure:
+
+```
+dotfiles  # collection of dotfiles
+```
 
 ## Collect dotfiles
 
