@@ -1,4 +1,4 @@
-export SHELL=/usr/local/bin/zsh
+export SHELL=$(which zsh)
 source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 
 [ -f ~/.my_aliases.sh ] && source $HOME/.my_aliases.sh
