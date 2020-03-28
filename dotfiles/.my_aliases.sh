@@ -4,7 +4,7 @@ if [ -x "$(command -v mvim)" ]; then
 fi
 [ -x "$(command -v rg)" ] && alias rg="rg --max-columns 200"
 [ -x "$(command -v firefox)" ] && alias fx="firefox --new-instance --profile $(mktemp -d)"
-[ -x "$(command -v backend.ai)" ] && alias bai="backend.ai"
+alias bai="backend.ai"
 
 # Git
 # Most git aliases are turned off in favor of scm_breeze
@@ -32,8 +32,7 @@ alias gds='git diff --staged'
 # alias gFh='git flow hotfix'
 # alias gFs='git flow support'
 # alias gl='git log --graph --pretty=format:''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'' --abbrev-commit'
-# alias gla='git log --graph --pretty=format:''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'' --abbrev-commit --branches --remotes'
-# alias glg='git log --graph --max-count=5'
+# alias gla='git log --graph --pretty=format:''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'' --abbrev-commit --branches --remotes' # alias glg='git log --graph --max-count=5'
 # alias globurl='noglob urlglobber '
 # alias gls='git log --stat --max-count=5'
 # alias gm='git merge'
@@ -54,7 +53,7 @@ alias dke='docker exec'
 alias dkE='docker exec -it'
 # alias dkh='docker history'
 alias dki='docker images'
-# alias dkin='docker inspect'
+alias dkin='docker inspect'
 # alias dkim='docker import'
 alias dkk='docker kill'
 alias dkl='docker logs'
@@ -87,7 +86,7 @@ alias dkv='docker version'
 # alias dkw='docker wait'
 alias dkx='docker stop'
 
-## Container (C)
+# ## Container (C)
 # alias dkC='docker container'
 # alias dkCa='docker container attach'
 # alias dkCcp='docker container cp'
@@ -113,7 +112,7 @@ alias dkx='docker stop'
 # alias dkCup='docker container update'
 # alias dkCw='docker container wait'
 
-## Image (I)
+# ## Image (I)
 # alias dkI='docker image'
 # alias dkIb='docker image build'
 # alias dkIh='docker image history'
@@ -127,14 +126,14 @@ alias dkx='docker stop'
 # alias dkIsv='docker image save'
 # alias dkIt='docker image tag'
 
-## Volume (V)
+# ## Volume (V)
 # alias dkV='docker volume'
 # alias dkVin='docker volume inspect'
 # alias dkVls='docker volume ls'
 # alias dkVpr='docker volume prune'
 # alias dkVrm='docker volume rm'
 
-## Network (N)
+# ## Network (N)
 # alias dkN='docker network'
 # alias dkNs='docker network connect'
 # alias dkNx='docker network disconnect'
@@ -143,21 +142,21 @@ alias dkx='docker stop'
 # alias dkNpr='docker network prune'
 # alias dkNrm='docker network rm'
 
-## System (Y)
+# ## System (Y)
 # alias dkY='docker system'
 # alias dkYdf='docker system df'
 # alias dkYpr='docker system prune'
 
-## Stack (K)
+# ## Stack (K)
 # alias dkK='docker stack'
 # alias dkKls='docker stack ls'
 # alias dkKps='docker stack ps'
 # alias dkKrm='docker stack rm'
 
-## Swarm (W)
+# ## Swarm (W)
 # alias dkW='docker swarm'
 
-## CleanUp (rm)
+# ## CleanUp (rm)
 # Clean up exited containers (docker < 1.13)
 # alias dkrmC='docker rm $(docker ps -qaf status=exited)'
 # Clean up dangling images (docker < 1.13)
@@ -189,6 +188,13 @@ alias dkx='docker stop'
 # alias dkcU='docker-compose up -d'
 # alias dkcv='docker-compose version'
 # alias dkcx='docker-compose stop'
+
+# Vagrant
+alias vg='vagrant'
+alias vgst='vagrant status'
+alias vgup='vagrant up'
+alias vgdt='vagrant destroy'
+alias vgssh='vagrant ssh'
 
 # List useful examples for a unix command
 function cheat() {

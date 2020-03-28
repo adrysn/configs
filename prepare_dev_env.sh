@@ -2,6 +2,7 @@ NEUMANN=0
 BACKENDAI=0
 CONSOLE=0
 MANAGERHUB=0
+LLDCAI=0
 
 for i in "$@" ; do
     if [[ $i == "all" ]] ; then
@@ -18,6 +19,8 @@ for i in "$@" ; do
         CONSOLE=1
     elif [[ $i == "managerhub" || $i == "manager-hub" || $i == "hub" ]] ; then
         MANAGERHUB=1
+    elif [[ $i == "lldcai" ]] ; then
+        LLDCAI=1
     fi
 done
 
@@ -63,16 +66,32 @@ fi
 # console
 if [[ $CONSOLE == 1 ]] ; then
     tmux new-session -d -s console -n app -c ~/Develop/backend.ai/backend.ai-dev/console
-        tmux send-keys -t 'console:0' 'nvm use 10.15.3 ; make test_web' Enter
+        tmux send-keys -t 'console:0' 'nvm use 12.13 ; npm run server:d' Enter
+        tmux new-window -d -n tscompile -c ~/Develop/backend.ai/backend.ai-dev/console
+            tmux send-keys -t 'console:1' 'nvm use 12.13 ; npm run build:d' Enter
         tmux new-window -d -n proxy -c ~/Develop/backend.ai/backend.ai-dev/console
-            tmux send-keys -t 'console:1' 'nvm use 10.15.3 ; make proxy' Enter
+            tmux send-keys -t 'console:2' 'nvm use 12.13 ; make proxy' Enter
         tmux new-window -d -n console-server -c ~/Develop/backend.ai/backend.ai-dev/console-server
-            tmux send-keys -t 'console:2' 'cd .' Enter
-            tmux send-keys -t 'console:2' 'python -m ai.backend.console.server' Enter
+            tmux send-keys -t 'console:3' 'cd .' Enter
+            tmux send-keys -t 'console:3' 'python -m ai.backend.console.server' Enter
 fi
 
 # manager-hub
 if [[ $MANAGERHUB == 1 ]] ; then
     tmux new-session -d -s managerhub -n docker-compose -c ~/Develop/backend.ai/backend.ai-dev/manager-hub
         tmux send-keys -t 'managerhub:0' 'make up' Enter
+fi
+
+# console
+if [[ $LLDCAI == 1 ]] ; then
+    tmux new-session -d -s lldcai -n lldcai
+        tmux send-keys -t 'lldcai:0' -n allinone 'ssh lldcai@10.231.238.12' Enter
+        tmux new-window -d -n ai1
+            tmux send-keys -t 'lldcai:1' 'ssh lldcai@10.231.238.31' Enter
+        tmux new-window -d -n ai2
+            tmux send-keys -t 'lldcai:2' 'ssh lldcai@10.231.238.32' Enter
+        tmux new-window -d -n ai3
+            tmux send-keys -t 'lldcai:3' 'ssh lldcai@10.231.238.33' Enter
+        tmux new-window -d -n ai4
+            tmux send-keys -t 'lldcai:4' 'ssh lldcai@10.231.238.34' Enter
 fi
