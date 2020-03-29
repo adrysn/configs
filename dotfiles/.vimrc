@@ -14,14 +14,12 @@ Plugin 'VundleVim/Vundle.vim'
 " add all your plugins here (note older versions of Vundle used Bundle instead of Plugins)
 
 " ----------------------------------------------------------------------------
-"" Visual
-Plugin 'airblade/vim-gitgutter'     " shows a git diff in the gutter
+" Visual
 Plugin 'itchyny/lightline.vim'      " pretty status bar
 Plugin 'lifepillar/vim-solarized8'  " solarized theme
+Plugin 'mhinz/vim-signify'          " shows a git diff in the gutter async
 Plugin 'rakr/vim-one'               " one-light, one-dark color schemes
-" vim-gutter
-set updatetime=250
-" lightline
+"" lightline
 set noshowmode
 let g:lightline = {
     \ 'colorscheme': 'solarized',
@@ -33,36 +31,38 @@ let g:lightline = {
     \     'gitbranch': 'FugitiveHead',
     \ },
 \ }
+"" vim-signify
+set updatetime=200
 
 " ----------------------------------------------------------------------------
-"" Addons
+" Addons
 Plugin 'jeetsukumaran/vim-buffergator'  " buffer management
 Plugin 'jremmen/vim-ripgrep'
 Plugin 'junegunn/fzf'           " fuzzy finder
 Plugin 'junegunn/fzf.vim'
 Plugin 'Konfekt/FastFold'       " speed up vim's folding
 Plugin 'sjl/vitality.vim'       " make vim play nicely with iTerm 2 and tmux
-" buffergator
+"" buffergator
 let g:buffergator_suppress_keymaps = 1
 let g:buffergator_viewport_split_policy = "B"
 noremap <Leader>jj :BuffergatorMruCyclePrev<CR>
 noremap <Leader>kk :BuffergatorMruCycleNext<CR>
 noremap <Leader>bl :BuffergatorOpen<CR>
-" vim-ripgrep
+"" vim-ripgrep
 let g:rg_highlight = 'true'
 set wildignore+=*.swp,*.zip,*.exe
 set wildignore+=*.jpg,*.png,*.gif
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
-" fzf
+"" fzf
 noremap <c-p>      :GFiles<CR>
 noremap <Leader>bb :Buffers<CR>
 noremap <Leader>bs :Files<CR>
 noremap <Leader>bg :GFiles?<CR>
 
 " ----------------------------------------------------------------------------
-"" Editing
+" Editing
 Plugin 'alvan/vim-closetag'     " auto-close html tags
 Plugin 'christoomey/vim-sort-motion'    " sort paragraph alphabetically, etc
 Plugin 'christoomey/vim-system-copy'    " interact with system clipboard
@@ -79,7 +79,7 @@ Plugin 'tpope/vim-surround'     " all about parens, brackets, quotes, ...
 Plugin 'vim-scripts/ReplaceWithRegister'    " replace text with register
 
 " ----------------------------------------------------------------------------
-"" Syntax
+" Syntax
 Plugin 'achimnol/python-syntax'
 Plugin 'cespare/vim-toml'
 Plugin 'hashivim/vim-terraform'
@@ -88,16 +88,16 @@ Plugin 'jonsmithers/vim-html-template-literals' " highlight JS literal string
 Plugin 'nvie/vim-flake8'
 Plugin 'pangloss/vim-javascript'
 Plugin 'w0rp/ale'
-" vim-html-template-literals
+"" vim-html-template-literals
 let g:html_indent_style1 = "inc"
 
 " ----------------------------------------------------------------------------
-"" Language specifics
-" Python
+" Language specifics
+"" Python
 Plugin 'tmhedberg/SimpylFold'           " better python folding
 Plugin 'tweekmonster/django-plus.vim'
 Plugin 'Vimjas/vim-python-pep8-indent'  " indentation comply with PEP8
-" JS
+"" JS
 Plugin 'heavenshell/vim-jsdoc'          " generate JSDoc
 
 call vundle#end()           " required
@@ -106,32 +106,38 @@ filetype plugin indent on   " required
 
 
 " ============================================================================
-"" UI
+" UI
 syntax enable           " syntax highlighting
 let opacity=100
 let blur=0
 let python_highlight_all=1
 
-set background=dark
 if has("gui_running")
     set guifont=JetBrains_Mono:h15
-    colorscheme solarized8
 else
-    set termguicolors
-    let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-    colorscheme solarized8
+    if $TERM =~ "-256color$" || $TERM == "linux"
+        set t_Co=256
+        if exists("+termguicolors")
+            set termguicolors
+            let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+            let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+        endif
+    endif
 endif
+set background=dark     " I prefer dark background
+colorscheme solarized8
+
 highlight ColorColumn ctermbg=236 guibg=#453440
 highlight SpecialKey ctermfg=238 guifg=#424242 ctermbg=NONE guibg=NONE
+set colorcolumn=80      " draw vertical line
+set cursorline          " show cursor line indicator
 set guioptions=         " no scroll bars
 set laststatus=2        " display status line always
-set number              " show line number
-set relativenumber      " use relative line number
-set colorcolumn=80      " draw vertical line
-set nowrap              " I don't like line wrapping
 set list                " show tabs, spaces, trailing blanks
 set listchars=tab:\┃\ ,space:·,trail:~,extends:>,precedes:<,nbsp:+
+set nowrap              " I don't like line wrapping
+set number              " show line number
+set relativenumber      " use relative line number
 set wildmenu            " tab completion for menu commands
 
 
@@ -148,28 +154,37 @@ set noswapfile
 set path+=**            " search down into subfolders
 set lazyredraw ttyfast
 
+"" Indent
+set tabstop=8
+set shiftwidth=4
+set softtabstop=4
+set noexpandtab
+set autoindent
+set nosmartindent
+set nocindent
+if exists("+breakindent")
+    set breakindent
+endif
+
 "" Editing
-set autoindent          " indent when moving to the next line while coding
-set smartindent         " tab is converted to 4 spaces (Python convention)
-set tabstop=4
-set shiftwidth=0        " use tabstop value
-set softtabstop=-1      " use shiftwidth value
-set expandtab           " tabs into spaces
-set smarttab
 set bs=2                " make backspace behave naturally
 set history=500         " limit history/undo levels
 set undolevels=500
+set pastetoggle=<F2>    " fix indent problem when pasting from ext. source
+
+"" Search
 set hlsearch            " highlight matches
 set ignorecase          " make search case insensitive
 set incsearch           " searching while typing
 set smartcase
-set pastetoggle=<F2>    " fix indent problem when pasting from ext. source
 
 
 " ============================================================================
-"" Key bindings
+" Key bindings
 map <F2> <Esc>:w<CR>:!python %:p<CR>
 inoremap jk <Esc>
+inoremap <C-a> <C-o>0   " move start of the line in insert mode
+inoremap <C-e> <C-o>$   " move end of the line in insert mode
 noremap <Leader>bt :enew<CR>
 noremap <Leader>bq :bp <BAR> bd #<CR>
 noremap <Leader>gs :bp <BAR> bd #<CR>
@@ -183,6 +198,8 @@ nnoremap <Leader><space> :nohlsearch<CR>
 nnoremap <space> za
 nnoremap <F5> :checktime<CR>
 vnoremap <Leader>s :sort<CR>        " map sort function to a key
+
+"" Git
 nnoremap <Leader>gs :Gstatus<CR>    " git shortcuts
 nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gb :Gblame<CR>
@@ -196,7 +213,7 @@ nnoremap <Leader>gw :Gwrite<CR>
 " nnoremap <Leader>g- :Silent Git stash<CR>:e<CR>
 " nnoremap <Leader>g+ :Silent Git stash pop<CR>:e<CR>
 
-" Snippets
+"" Snippets
 nnoremap \html :-1read $HOME/.vim/.skeleton.html<CR>3jf>a
 nnoremap \pywait import time; time.sleep(5000)<ESC>
 
@@ -204,12 +221,10 @@ nnoremap \pywait import time; time.sleep(5000)<ESC>
 " ============================================================================
 " IDE-like Setup
 "" Python
-au BufNewFile,BufRead *.py
-    \ set tabstop=4 |
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix
-
-"" Web
-" au BufNewFile,BufRead *.js,*.html,*.css
-"     \ set tabstop=2
+au FileType python	setl ts=8 sts=4 sw=4 et
+au FileType html	setl ts=8 sts=2 sw=2 et
+au FileType javascript	setl ts=8 sts=2 sw=2 et
+au FileType json	setl ts=8 sts=2 sw=2 et
+au FileType yaml	setl ts=8 sts=2 sw=2 et
+au FileType toml	setl ts=8 sts=2 sw=2 et
+au FileType markdown	setl ts=8 sts=2 sw=2 et
