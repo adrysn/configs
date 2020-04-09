@@ -1,3 +1,5 @@
+let mapleader = ","     " easier leader key
+
 " ============================================================================
 " Vundle
 set nocompatible        " this is 21st century
@@ -125,7 +127,10 @@ else
     endif
 endif
 set background=dark     " I prefer dark background
-colorscheme solarized8
+try
+    colorscheme solarized8
+catch
+endtry
 
 highlight ColorColumn ctermbg=236 guibg=#453440
 highlight SpecialKey ctermfg=238 guifg=#424242 ctermbg=NONE guibg=NONE
@@ -147,7 +152,6 @@ autocmd! bufwritepost .vimrc source %   " auto reload .vimrc when saved
 autocmd BufLeave,FocusLost * wall       " auto save when loose focus/buffer
 set encoding=utf-8      " use UTF-8
 set mouse=a             " use mouse
-let mapleader = ","     " easier leader key
 set nobackup            " disable stupid backup and swap files
 set nowritebackup
 set noswapfile
