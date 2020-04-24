@@ -2,7 +2,7 @@ NEUMANN=0
 BACKENDAI=0
 CONSOLE=0
 MANAGERHUB=0
-LLDCAI=0
+LDCCAI=0
 
 for i in "$@" ; do
     if [[ $i == "all" ]] ; then
@@ -19,8 +19,8 @@ for i in "$@" ; do
         CONSOLE=1
     elif [[ $i == "managerhub" || $i == "manager-hub" || $i == "hub" ]] ; then
         MANAGERHUB=1
-    elif [[ $i == "lldcai" ]] ; then
-        LLDCAI=1
+    elif [[ $i == "lddcai" ]] ; then
+        LDCCAI=1
     fi
 done
 
@@ -83,15 +83,15 @@ if [[ $MANAGERHUB == 1 ]] ; then
 fi
 
 # console
-if [[ $LLDCAI == 1 ]] ; then
-    tmux new-session -d -s lldcai -n lldcai
-        tmux send-keys -t 'lldcai:0' -n allinone 'ssh lldcai@10.231.238.12' Enter
+if [[ $LDCCAI == 1 ]] ; then
+    tmux new-session -d -s ldccai -n ldccai
+        tmux send-keys -t 'ldccai:0' -n allinone 'ssh ldccai@10.231.238.12' Enter
         tmux new-window -d -n ai1
-            tmux send-keys -t 'lldcai:1' 'ssh lldcai@10.231.238.31' Enter
+            tmux send-keys -t 'ldccai:1' 'ssh ldccai@10.231.238.31' Enter
         tmux new-window -d -n ai2
-            tmux send-keys -t 'lldcai:2' 'ssh lldcai@10.231.238.32' Enter
+            tmux send-keys -t 'ldccai:2' 'ssh ldccai@10.231.238.32' Enter
         tmux new-window -d -n ai3
-            tmux send-keys -t 'lldcai:3' 'ssh lldcai@10.231.238.33' Enter
+            tmux send-keys -t 'ldccai:3' 'ssh ldccai@10.231.238.33' Enter
         tmux new-window -d -n ai4
-            tmux send-keys -t 'lldcai:4' 'ssh lldcai@10.231.238.34' Enter
+            tmux send-keys -t 'ldccai:4' 'ssh ldccai@10.231.238.34' Enter
 fi

@@ -27,8 +27,10 @@ resource "aws_security_group" "jpark_personal" {
 }
 
 data "aws_security_group" "default" {
-  name = "default"
-  vpc_id = "vpc-395e9750"
+  # name = "default"
+  # vpc_id = "vpc-395e9750"  # personal
+  name = "cld190727-bai"  # lablup
+  vpc_id = "vpc-253edd4c"  # lablup
 }
 
 resource "aws_instance" "jpark_personal" {
