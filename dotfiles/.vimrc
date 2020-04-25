@@ -19,7 +19,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Visual
 Plugin 'itchyny/lightline.vim'      " pretty status bar
 Plugin 'lifepillar/vim-solarized8'  " solarized theme
-Plugin 'mhinz/vim-signify'          " shows a git diff in the gutter async
+Plugin 'airblade/vim-gitgutter'     " shows a git diff in the gutter
 Plugin 'rakr/vim-one'               " one-light, one-dark color schemes
 "" lightline
 set noshowmode
@@ -33,7 +33,7 @@ let g:lightline = {
     \     'gitbranch': 'FugitiveHead',
     \ },
 \ }
-"" vim-signify
+"" vim-gitgutter
 set updatetime=200
 
 " ----------------------------------------------------------------------------
@@ -139,7 +139,11 @@ set cursorline          " show cursor line indicator
 set guioptions=         " no scroll bars
 set laststatus=2        " display status line always
 set list                " show tabs, spaces, trailing blanks
-set listchars=tab:\┃\ ,space:·,trail:~,extends:>,precedes:<,nbsp:+
+if has("patch-7.4.710")
+    set listchars=tab:\┃\ ,space:·,trail:~,extends:>,precedes:<,nbsp:+
+else
+    set listchars=tab:\┃\ ,trail:~,extends:>,precedes:<,nbsp:+
+endif
 set nowrap              " I don't like line wrapping
 set number              " show line number
 set relativenumber      " use relative line number
