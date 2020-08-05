@@ -1,3 +1,6 @@
+if [ -x "$(command -v exa)" ]; then
+    alias el="exa -abghHliSG --group-directories-first"
+fi
 if [ -x "$(command -v mvim)" ]; then
     alias vi="mvim -v"
     alias vim="mvim"
@@ -36,6 +39,7 @@ alias gds='git diff --staged'
 # alias gFs='git flow support'
 # alias gl='git log --graph --pretty=format:''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'' --abbrev-commit'
 # alias gla='git log --graph --pretty=format:''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'' --abbrev-commit --branches --remotes' # alias glg='git log --graph --max-count=5'
+alias glb='git log --graph --simplify-by-decoration --pretty=format:"%d" --all'
 # alias globurl='noglob urlglobber '
 # alias gls='git log --stat --max-count=5'
 # alias gm='git merge'

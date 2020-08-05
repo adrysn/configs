@@ -3,11 +3,11 @@ BACKENDAI=0
 CONSOLE=0
 MANAGERHUB=0
 LDCCAI=0
+KMU=0
+CLOUD=0
 
 for i in "$@" ; do
     if [[ $i == "all" ]] ; then
-        NEUMANN=1
-        BACKENDAI=1
         CONSOLE=1
         MANAGERHUB=1
         break
@@ -19,8 +19,12 @@ for i in "$@" ; do
         CONSOLE=1
     elif [[ $i == "managerhub" || $i == "manager-hub" || $i == "hub" ]] ; then
         MANAGERHUB=1
-    elif [[ $i == "lddcai" ]] ; then
+    elif [[ $i == "ldcc" || $i == "lddcai" ]] ; then
         LDCCAI=1
+    elif [[ $i == "kmu" || $i == "kmu-bigdata" ]] ; then
+        KMU=1
+    elif [[ $i == "cloud" ]] ; then
+        CLOUD=1
     fi
 done
 
@@ -66,32 +70,93 @@ fi
 # console
 if [[ $CONSOLE == 1 ]] ; then
     tmux new-session -d -s console -n app -c ~/Develop/backend.ai/backend.ai-dev/console
-        tmux send-keys -t 'console:0' 'nvm use 12.13 ; npm run server:d' Enter
+        tmux send-keys -t 'console:app' 'nvm use 12.17 ; npm run server:d' Enter
         tmux new-window -d -n tscompile -c ~/Develop/backend.ai/backend.ai-dev/console
-            tmux send-keys -t 'console:1' 'nvm use 12.13 ; npm run build:d' Enter
+            tmux send-keys -t 'console:tscompile' 'nvm use 12.17 ; npm run build:d' Enter
         tmux new-window -d -n proxy -c ~/Develop/backend.ai/backend.ai-dev/console
-            tmux send-keys -t 'console:2' 'nvm use 12.13 ; make proxy' Enter
+            tmux send-keys -t 'console:proxy' 'nvm use 12.17 ; make proxy' Enter
         tmux new-window -d -n console-server -c ~/Develop/backend.ai/backend.ai-dev/console-server
-            tmux send-keys -t 'console:3' 'cd .' Enter
-            tmux send-keys -t 'console:3' 'python -m ai.backend.console.server' Enter
+            tmux send-keys -t 'console:console-server' 'cd .' Enter
+            tmux send-keys -t 'console:console-server' 'python -m ai.backend.console.server' Enter
 fi
 
 # manager-hub
 if [[ $MANAGERHUB == 1 ]] ; then
     tmux new-session -d -s managerhub -n docker-compose -c ~/Develop/backend.ai/backend.ai-dev/manager-hub
-        tmux send-keys -t 'managerhub:0' 'make up' Enter
+        tmux send-keys -t 'managerhub:docker-compose' 'make up' Enter
+        tmux new-window -d -n vim
 fi
 
-# console
+# ldccai
 if [[ $LDCCAI == 1 ]] ; then
-    tmux new-session -d -s ldccai -n ldccai
-        tmux send-keys -t 'ldccai:0' -n allinone 'ssh ldccai@10.231.238.12' Enter
-        tmux new-window -d -n ai1
-            tmux send-keys -t 'ldccai:1' 'ssh ldccai@10.231.238.31' Enter
-        tmux new-window -d -n ai2
-            tmux send-keys -t 'ldccai:2' 'ssh ldccai@10.231.238.32' Enter
-        tmux new-window -d -n ai3
-            tmux send-keys -t 'ldccai:3' 'ssh ldccai@10.231.238.33' Enter
-        tmux new-window -d -n ai4
-            tmux send-keys -t 'ldccai:4' 'ssh ldccai@10.231.238.34' Enter
+    tmux new-session -d -s ldccai -n manager
+        tmux send-keys -t 'ldccai:manager' 'ssh ldccai@10.231.238.212' Enter
+        tmux new-window -d -n console-server
+            tmux send-keys -t 'ldccai:console-server' 'ssh ldccai@10.231.238.211' Enter
+        tmux new-window -d -n halfstack
+            tmux send-keys -t 'ldccai:halfstack' 'ssh ldccai@10.231.238.213' Enter
+        tmux new-window -d -n wsproxy
+            tmux send-keys -t 'ldccai:wsproxy' 'ssh ldccai@10.231.238.214' Enter
+        tmux new-window -d -n nginx
+            tmux send-keys -t 'ldccai:nginx' 'ssh ldccai@210.93.145.6' Enter
+        tmux new-window -d -n ai1-v100
+            tmux send-keys -t 'ldccai:ai1-v100' 'ssh ldccai@10.231.238.31' Enter
+        tmux new-window -d -n ai2-v100
+            tmux send-keys -t 'ldccai:ai2-v100' 'ssh ldccai@10.231.238.32' Enter
+        tmux new-window -d -n ai3-v100
+            tmux send-keys -t 'ldccai:ai3-v100' 'ssh ldccai@10.231.238.33' Enter
+        tmux new-window -d -n ai4-v100
+            tmux send-keys -t 'ldccai:ai4-v100' 'ssh ldccai@10.231.238.34' Enter
+        tmux new-window -d -n ai5-1080ti
+            tmux send-keys -t 'ldccai:ai5-1080ti' 'ssh ldccai@10.231.238.41' Enter
+        tmux new-window -d -n ai6-1080ti
+            tmux send-keys -t 'ldccai:ai6-1080ti' 'ssh ldccai@10.231.238.42' Enter
+        tmux new-window -d -n ai7-1080ti
+            tmux send-keys -t 'ldccai:ai7-1080tij' 'ssh ldccai@10.231.238.43' Enter
+fi
+
+# kmu-bigdata
+if [[ $KMU == 1 ]] ; then
+    tmux new-session -d -s kmubigdata -n kmu01
+        tmux send-keys -t 'kmubigdata:kmu01' 'ssh -p 2222 kookmin@node01.kmu-bigdata.onpremise.backend.ai' Enter
+        tmux new-window -d -n kmu02
+            tmux send-keys -t 'kmubigdata:kmu02' 'ssh -p 2222 kookmin@node02.kmu-bigdata.onpremise.backend.ai' Enter
+        tmux new-window -d -n kmu03
+            tmux send-keys -t 'kmubigdata:kmu03' 'ssh -p 2222 kookmin@node03.kmu-bigdata.onpremise.backend.ai' Enter
+        tmux new-window -d -n kmu04
+            tmux send-keys -t 'kmubigdata:kmu04' 'ssh -p 2222 kookmin@node04.kmu-bigdata.onpremise.backend.ai' Enter
+fi
+
+# cloud
+if [[ $CLOUD == 1 ]] ; then
+    tmux new-session -d -s cloud -n manager
+        tmux send-keys -t 'cloud:manager' \
+	    'bai-cloud ssh-instance cloud-190727-bai-manager' Enter \
+	    'ubuntu.sh' Enter \
+	    'cd' Enter
+        tmux new-window -d -n console-server
+            tmux send-keys -t 'cloud:console-server' \
+		'bai-cloud ssh-instance cloud-190727-bai-console-server' Enter \
+		'devops.sh' Enter \
+		'cd' Enter
+        tmux new-window -d -n baryonyx
+            tmux send-keys -t 'cloud:baryonyx' \
+		'bai-cloud ssh-instance baryonyx' Enter \
+		'devops.sh' Enter \
+		'cd' Enter
+        tmux new-window -d -n tarbo
+            tmux send-keys -t 'cloud:tarbo' \
+		'bai-cloud ssh-instance tarbo' Enter \
+		'devops.sh' Enter \
+		'cd' Enter
+        tmux new-window -d -n hydra01
+            tmux send-keys -t 'cloud:hydra01' \
+		'bai-cloud ssh-instance hydra01' Enter \
+		'devops.sh' Enter \
+		'cd' Enter
+        tmux new-window -d -n hydra02
+            tmux send-keys -t 'cloud:hydra02' \
+		'bai-cloud ssh-instance hydra02' Enter \
+		'devops.sh' Enter \
+		'cd' Enter
 fi

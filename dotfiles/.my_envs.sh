@@ -42,3 +42,9 @@ fi
 
 # scm_breeze
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
+
+# bat
+export BAT_THEME="Solarized (dark)"
+
+# Created by `userpath` on 2020-07-03 03:40:41
+export PATH="/Users/adrysn/.local/bin:$PATH"

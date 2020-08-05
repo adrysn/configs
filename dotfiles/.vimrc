@@ -79,6 +79,14 @@ Plugin 'tpope/vim-endwise'      " cleverly add end or endfunction
 Plugin 'tpope/vim-fugitive'     " Git wrapper
 Plugin 'tpope/vim-surround'     " all about parens, brackets, quotes, ...
 Plugin 'vim-scripts/ReplaceWithRegister'    " replace text with register
+"" vim-closetag
+let g:closetag_filetypes = 'html,xhtml,phtml,javascript,typescript'
+let g:closetag_regions = {
+      \ 'typescript.tsx': 'jsxRegion,tsxRegion,litHtmlRegion',
+      \ 'javascript.jsx': 'jsxRegion,litHtmlRegion',
+      \ 'javascript':     'litHtmlRegion',
+      \ 'typescript':     'litHtmlRegion',
+      \ }
 
 " ----------------------------------------------------------------------------
 " Syntax
@@ -87,6 +95,7 @@ Plugin 'cespare/vim-toml'
 Plugin 'hashivim/vim-terraform'
 Plugin 'honza/vim-snippets'
 Plugin 'jonsmithers/vim-html-template-literals' " highlight JS literal string
+Plugin 'leafgarland/typescript-vim'		" highlight TypeSscript
 Plugin 'nvie/vim-flake8'
 Plugin 'pangloss/vim-javascript'
 Plugin 'w0rp/ale'
