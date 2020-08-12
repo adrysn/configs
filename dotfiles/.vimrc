@@ -5,22 +5,17 @@ let mapleader = ","     " easier leader key
 set nocompatible        " this is 21st century
 filetype off            " required
 
-" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
-if isdirectory(expand('~/.vim/bundle/Vundle.vim'))
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-" call vundle#begin('~/some/path/here')
+call plug#begin('~/.vim/plugged')
 " let vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-" add all your plugins here (note older versions of Vundle used Bundle instead of Plugins)
+Plug 'VundleVim/Vundle.vim'
 
 " ----------------------------------------------------------------------------
 " Visual
-Plugin 'itchyny/lightline.vim'      " pretty status bar
-Plugin 'lifepillar/vim-solarized8'  " solarized theme
-Plugin 'airblade/vim-gitgutter'     " shows a git diff in the gutter
-Plugin 'rakr/vim-one'               " one-light, one-dark color schemes
+Plug 'itchyny/lightline.vim'      " pretty status bar
+Plug 'lifepillar/vim-solarized8'  " solarized theme
+Plug 'airblade/vim-gitgutter'     " shows a git diff in the gutter
+Plug 'rakr/vim-one'               " one-light, one-dark color schemes
 "" lightline
 set noshowmode
 let g:lightline = {
@@ -33,17 +28,19 @@ let g:lightline = {
     \     'gitbranch': 'FugitiveHead',
     \ },
 \ }
+"" vim-solarized
+let g:solarized_diffmode = "high"
 "" vim-gitgutter
 set updatetime=200
 
 " ----------------------------------------------------------------------------
 " Addons
-Plugin 'jeetsukumaran/vim-buffergator'  " buffer management
-Plugin 'jremmen/vim-ripgrep'
-Plugin 'junegunn/fzf'           " fuzzy finder
-Plugin 'junegunn/fzf.vim'
-Plugin 'Konfekt/FastFold'       " speed up vim's folding
-Plugin 'sjl/vitality.vim'       " make vim play nicely with iTerm 2 and tmux
+Plug 'jeetsukumaran/vim-buffergator'  " buffer management
+Plug 'jremmen/vim-ripgrep'
+Plug 'junegunn/fzf'           " fuzzy finder
+Plug 'junegunn/fzf.vim'
+Plug 'Konfekt/FastFold'       " speed up vim's folding
+Plug 'sjl/vitality.vim'       " make vim play nicely with iTerm 2 and tmux
 "" buffergator
 let g:buffergator_suppress_keymaps = 1
 let g:buffergator_viewport_split_policy = "B"
@@ -65,20 +62,20 @@ noremap <Leader>bg :GFiles?<CR>
 
 " ----------------------------------------------------------------------------
 " Editing
-Plugin 'alvan/vim-closetag'     " auto-close html tags
-Plugin 'christoomey/vim-sort-motion'    " sort paragraph alphabetically, etc
-Plugin 'christoomey/vim-system-copy'    " interact with system clipboard
-Plugin 'editorconfig/editorconfig-vim'  " editorconfig support
-Plugin 'farmergreg/vim-lastplace'       " reopen files at last position
-Plugin 'jiangmiao/auto-pairs'   " auto-pair parenthesis, brackets
-Plugin 'kana/vim-textobj-indent'        " indent block as a text obj
-Plugin 'kana/vim-textobj-user'          " customize text obj
-Plugin 'terryma/vim-multiple-cursors'   " multiple selection
-Plugin 'tpope/vim-commentary'   " easier commenting
-Plugin 'tpope/vim-endwise'      " cleverly add end or endfunction
-Plugin 'tpope/vim-fugitive'     " Git wrapper
-Plugin 'tpope/vim-surround'     " all about parens, brackets, quotes, ...
-Plugin 'vim-scripts/ReplaceWithRegister'    " replace text with register
+Plug 'alvan/vim-closetag'     " auto-close html tags
+Plug 'christoomey/vim-sort-motion'    " sort paragraph alphabetically, etc
+Plug 'christoomey/vim-system-copy'    " interact with system clipboard
+Plug 'editorconfig/editorconfig-vim'  " editorconfig support
+Plug 'farmergreg/vim-lastplace'       " reopen files at last position
+Plug 'jiangmiao/auto-pairs'   " auto-pair parenthesis, brackets
+Plug 'kana/vim-textobj-indent'        " indent block as a text obj
+Plug 'kana/vim-textobj-user'          " customize text obj
+Plug 'terryma/vim-multiple-cursors'   " multiple selection
+Plug 'tpope/vim-commentary'   " easier commenting
+Plug 'tpope/vim-endwise'      " cleverly add end or endfunction
+Plug 'tpope/vim-fugitive'     " Git wrapper
+Plug 'tpope/vim-surround'     " all about parens, brackets, quotes, ...
+Plug 'vim-scripts/ReplaceWithRegister'    " replace text with register
 "" vim-closetag
 let g:closetag_filetypes = 'html,xhtml,phtml,javascript,typescript'
 let g:closetag_regions = {
@@ -90,30 +87,29 @@ let g:closetag_regions = {
 
 " ----------------------------------------------------------------------------
 " Syntax
-Plugin 'achimnol/python-syntax'
-Plugin 'cespare/vim-toml'
-Plugin 'hashivim/vim-terraform'
-Plugin 'honza/vim-snippets'
-Plugin 'jonsmithers/vim-html-template-literals' " highlight JS literal string
-Plugin 'leafgarland/typescript-vim'		" highlight TypeSscript
-Plugin 'nvie/vim-flake8'
-Plugin 'pangloss/vim-javascript'
-Plugin 'w0rp/ale'
+Plug 'achimnol/python-syntax'
+Plug 'cespare/vim-toml'
+Plug 'hashivim/vim-terraform'
+Plug 'honza/vim-snippets'
+Plug 'jonsmithers/vim-html-template-literals' " highlight JS literal string
+Plug 'leafgarland/typescript-vim'		" highlight TypeSscript
+Plug 'nvie/vim-flake8'
+Plug 'pangloss/vim-javascript'
+Plug 'w0rp/ale'
 "" vim-html-template-literals
 let g:html_indent_style1 = "inc"
 
 " ----------------------------------------------------------------------------
 " Language specifics
 "" Python
-Plugin 'tmhedberg/SimpylFold'           " better python folding
-Plugin 'tweekmonster/django-plus.vim'
-Plugin 'Vimjas/vim-python-pep8-indent'  " indentation comply with PEP8
+Plug 'tmhedberg/SimpylFold'           " better python folding
+Plug 'tweekmonster/django-plus.vim'
+Plug 'Vimjas/vim-python-pep8-indent'  " indentation comply with PEP8
 "" JS
-Plugin 'heavenshell/vim-jsdoc'          " generate JSDoc
+Plug 'heavenshell/vim-jsdoc'          " generate JSDoc
 
-call vundle#end()           " required
-endif
-filetype plugin indent on   " required
+call plug#end()
+filetype plugin indent on
 
 
 " ============================================================================
@@ -137,7 +133,7 @@ else
 endif
 set background=dark     " I prefer dark background
 try
-    colorscheme solarized8
+    colorscheme solarized8_flat
 catch
 endtry
 
