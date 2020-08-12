@@ -28,12 +28,6 @@ if [ -d "$HOME/.pyenv/plugins/pyenv-virtualenv" ]; then
     eval "$(pyenv virtualenv-init -)"
 fi
 
-# Go
-if [ -d "$HOME/Develop/go" ]; then
-    export PATH=$PATH:/usr/local/go/bin:/Users/adrysn/Develop/go/bin
-    export GOPATH=$HOME/Develop/go
-fi
-
 # fzf & ripgrep
 if [ -f "$HOME/.fzf.zsh" ]; then
     source $HOME/.fzf.zsh
@@ -46,5 +40,8 @@ fi
 # bat
 export BAT_THEME="Solarized (dark)"
 
+# poetry
+export PATH="$HOME/.poetry/bin:$PATH"
+
 # Created by `userpath` on 2020-07-03 03:40:41
-export PATH="/Users/adrysn/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
