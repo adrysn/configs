@@ -8,4 +8,3 @@ DOTFILES_DIR=./dotfiles
 \cp -f ~/.ctags $DOTFILES_DIR
 \cp -f ~/.tmux.conf $DOTFILES_DIR
 \cp -f ~/.vimrc $DOTFILES_DIR
-\cp -f ../prepare_dev_env.sh .

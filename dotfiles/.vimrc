@@ -133,7 +133,7 @@ else
 endif
 set background=dark     " I prefer dark background
 try
-    colorscheme solarized8_flat
+    colorscheme solarized8_high
 catch
 endtry
 
@@ -168,7 +168,7 @@ set path+=**            " search down into subfolders
 set lazyredraw ttyfast
 
 "" Indent
-set tabstop=8
+set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set noexpandtab
