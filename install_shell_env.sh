@@ -16,9 +16,21 @@ cp "$DOTFILE_SRC_DIR"/.my_* ~
 info "installing OS packages..."
 if [[ "$OSNAME" == "darwin"* ]]; then
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	# modern cli tools
+	brew tap clementtsang/bottom
+	brew install bat bottom fd fzf htop jq ncdu ripgrep
 else
 	sudo apt update -y
 	sudo apt install -y curl git net-tools vim
+	# modern cli tools (may require the latest OS)
+	sudo apt install -y bat fd-find fzf htop jq ncdu
+	# ripgrep
+	curl -LO https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep_12.1.1_amd64.deb
+	sudo dpkg -i ripgrep_12.1.1_amd64.deb
+	# bottom
+	curl -LO https://github.com/ClementTsang/bottom/releases/download/0.5.6/bottom_0.5.6_amd64.deb
+	alias bat="batcat"
+	alias fd="fdfind"
 fi
 
 # -- Configure vim
