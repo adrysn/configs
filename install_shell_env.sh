@@ -45,7 +45,7 @@ vim -c 'PlugInstall'
 info "configuring tmux..."
 cp "$DOTFILE_SRC_DIR"/.tmux.conf ~
 if [[ "$OSNAME" == "darwin"* ]]; then
-	brew install tmux
+	brew install tmux reattach-to-user-namespace
 else
 	sudo apt install tmux
 fi
