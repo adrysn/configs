@@ -10,7 +10,7 @@ else
 fi
 export EDITOR="$VISUAL"
 
-export PATH="/usr/local/bin:$HOME/bin:$PATH"
+export PATH="/opt/homebrew/bin:/usr/local/bin:$HOME/bin:$PATH"
 
 # Node.js
 [ -d "$HOME/.nvm" ] && export NVM_DIR="$HOME/.nvm"

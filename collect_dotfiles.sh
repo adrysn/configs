@@ -1,10 +1,11 @@
+set -e
+
 DOTFILES_DIR=./dotfiles
 
-\cp -f ~/.bash_profile $DOTFILES_DIR
-\cp -f ~/.my_aliases.sh $DOTFILES_DIR
-\cp -f ~/.my_envs.sh $DOTFILES_DIR
-\cp -f ~/.zpreztorc $DOTFILES_DIR
-\cp -f ~/.zshrc $DOTFILES_DIR
-\cp -f ~/.ctags $DOTFILES_DIR
-\cp -f ~/.tmux.conf $DOTFILES_DIR
-\cp -f ~/.vimrc $DOTFILES_DIR
+[[ -f ~/.bash_profile ]] && \cp -f ~/.bash_profile $DOTFILES_DIR
+[[ -f ~/.my_aliases.sh ]] && \cp -f ~/.my_aliases.sh $DOTFILES_DIR
+[[ -f ~/.my_envs.sh ]] && \cp -f ~/.my_envs.sh $DOTFILES_DIR
+[[ -f ~/.zpreztorc ]] && \cp -f ~/.zpreztorc $DOTFILES_DIR
+[[ -f ~/.zshrc ]] && \cp -f ~/.zshrc $DOTFILES_DIR
+[[ -f ~/.tmux.conf ]] && \cp -f ~/.tmux.conf $DOTFILES_DIR
+[[ -f ~/.vimrc ]] && \cp -f ~/.vimrc $DOTFILES_DIR
