@@ -1,32 +1,37 @@
 #!/bin/bash
 set -e
 
-cd "$(dirname '$0')/.."
-cp ../dotfiles/.bash_profile ~
-cp ../dotfiles/.my_* ~
-echo 'source $HOME/.bash_profile' >> ~/.bashrc
-
+cd "$(dirname '$0')"
+source ./common.sh
 
 OSNAME="$OSTYPE"
+DOTFILE_SRC_DIR=./dotfiles
+
+cp "$DOTFILE_SRC_DIR"/.bash_profile ~
+cp "$DOTFILE_SRC_DIR"/.my_* ~
+# echo 'source $HOME/.bash_profile' >> ~/.bashrc
 
 
 # -- Install OS packages
+info "installing OS packages..."
 if [[ "$OSNAME" == "darwin"* ]]; then
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
 	sudo apt update -y
-	sudo apt install -y vim net-tools
+	sudo apt install -y curl git net-tools vim
 fi
 
 # -- Configure vim
-cp ../dotfiles/.vimrc ~
+info "configuring vim..."
+cp "$DOTFILE_SRC_DIR"/.vimrc ~
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim -c 'PlugInstall'
 
 
 # -- Configure tmux
-cp ../dotfiles/.tmux.conf ~
+info "configuring tmux..."
+cp "$DOTFILE_SRC_DIR"/.tmux.conf ~
 if [[ "$OSNAME" == "darwin"* ]]; then
 	brew install tmux
 else
@@ -35,6 +40,7 @@ fi
 
 
 # -- pyenv / virtualenv
+info "installing pyenv / virtualenv..."
 if [[ "$OSNAME" == "darwin"* ]]; then
 	brew install openssl readline sqlite3 xz zlib
 else
@@ -46,7 +52,10 @@ git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/py
 
 # -- Install zprezto (if zsh exists)
 if command -v zsh &> /dev/null; then
+	info "installing zprezto..."
 	git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-	cp ../dotfiles/.zshrc ~
-	cp ../dotfiles/.zpreztorc ~
+	cp "$DOTFILE_SRC_DIR"/.zshrc ~
+	cp "$DOTFILE_SRC_DIR"/.zpreztorc ~
 fi
+
+info "done."

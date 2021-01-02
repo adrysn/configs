@@ -1,3 +1,4 @@
+alias ll="ls -l"
 if [ -x "$(command -v exa)" ]; then
     alias el="exa -abghHliSG --group-directories-first"
 fi
