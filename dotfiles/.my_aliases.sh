@@ -1,8 +1,8 @@
 alias ll="ls -l"
 if [ -x "$(command -v exa)" ]; then
-    alias el="exa -bghHliSG --group-directories-first"
+    alias el="exa -bghHliS --group-directories-first"
+    alias els="exa -bghHliSG --group-directories-first"
     alias ela="exa -abghHliSG --group-directories-first"
-    alias ell="exa -bghHliS --group-directories-first"
 fi
 if [ -x "$(command -v mvim)" ]; then
     alias vi="mvim -v"

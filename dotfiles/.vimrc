@@ -158,7 +158,7 @@ set wildmenu            " tab completion for menu commands
 " ============================================================================
 " General
 autocmd! bufwritepost .vimrc source %   " auto reload .vimrc when saved
-autocmd BufLeave,FocusLost * wall       " auto save when loose focus/buffer
+autocmd BufLeave,FocusLost * silent! wall       " auto save when loose focus/buffer
 set encoding=utf-8      " use UTF-8
 set mouse=a             " use mouse
 set nobackup            " disable stupid backup and swap files
