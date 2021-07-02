@@ -23,6 +23,7 @@ if [ -d "$HOME/.pyenv" ]; then
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
+    [[ $(pyenv --version | grep -Po '[0-9](?=\.[0-9]\.[0-9])') -gt 1 ]] && eval "$(pyenv init --path)" || eval "$(pyenv init -)"
 fi
 if [ -d "$HOME/.pyenv/plugins/pyenv-virtualenv" ]; then
     eval "$(pyenv virtualenv-init -)"
