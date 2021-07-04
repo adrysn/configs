@@ -35,6 +35,9 @@ if [ -f "$HOME/.fzf.zsh" ]; then
     export FZF_CTRL_T_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
 fi
 
+# scm_breeze
+[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
+
 # bat
 export BAT_THEME="Solarized (dark)"
 

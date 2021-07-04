@@ -197,6 +197,30 @@ if ! command -v delta &> /dev/null ; then
 fi
 
 
+# === Install gh (Github CLI)
+if ! command -v gh &> /dev/null ; then
+    case "${OS}" in
+        "osx")
+            brew install gh ;;
+        "centos")
+            gh_version=1.12.1
+            curl -OL https://github.com/cli/cli/releases/download/v${gh_version}/gh_${gh_version}_linux_amd64.tar.gz
+            tar -xvf gh_${gh_version}_linux_amd64.tar.gz
+            sudo mv gh_${gh_version}_linux_amd64/bin/gh /usr/local/bin/
+            rm -rf gh_${gh_version}_linux_amd64*
+            ;;
+    esac
+    git config --global pager.diff "delta"
+    git config --global pager.log "delta"
+    git config --global pager.reflog "delta"
+    git config --global pager.show "delta"
+    git config --global interactive.diffFilter "delta --color-only"
+    git config --global delta.features "line-numbers decorations"
+    git config --global delta.whitespace-error-style "22 reverse"
+    git config --global 'delta "decorations"'.commit-decoration-style "bold yellow box ul"
+fi
+
+
 # === Install vim plugins.
 if [[ ! -f "${HOME}/.vim/autoload/plug.vim" ]] ; then
     info "Installing plug.vim ..."

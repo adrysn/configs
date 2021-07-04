@@ -28,7 +28,7 @@ alias sctlt='sudo systemctl stop'
 
 # Git
 # Most git aliases are turned off in favor of scm_breeze
-[ -x "$(command -v hub)"  ] && alias git=hub
+[ -x "$(command -v hub)" ] && alias git=hub
 # alias g='git'
 alias ga='git add'
 alias gash='git stash'
