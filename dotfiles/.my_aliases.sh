@@ -1,9 +1,18 @@
 alias ll="ls -l"
 if [ -x "$(command -v exa)" ]; then
     alias el="exa -bghHliS --group-directories-first"
-    alias els="exa -bghHliSG --group-directories-first"
-    alias ela="exa -abghHliSG --group-directories-first"
+    alias es="exa -bghHliSG --group-directories-first"
 fi
+if [ -x "$(command -v bat)" ]; then
+    alias cat="bat"
+fi
+if [ -x "$(command -v dust)" ]; then
+    alias du="dust"
+fi
+if [ -x "$(command -v duf)" ]; then
+    alias df="duf"
+fi
+
 if [ -x "$(command -v mvim)" ]; then
     alias vi="mvim -v"
     alias vim="mvim"
@@ -13,8 +22,9 @@ fi
 alias bai="backend.ai"
 
 # Systemctl
-alias sctl='sudo systemctl'
-alias jctl='sudo journalctl --output cat  -f -n 500 -u'
+alias jctl='sudo journalctl --output cat -f -n 500 -u'
+alias sctlr='sudo systemctl restart'
+alias sctlt='sudo systemctl stop'
 
 # Git
 # Most git aliases are turned off in favor of scm_breeze

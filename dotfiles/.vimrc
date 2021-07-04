@@ -120,7 +120,7 @@ let blur=0
 let python_highlight_all=1
 
 if has("gui_running")
-    set guifont=JetBrains_Mono:h15
+    set guifont=JetBrains_Mono:h13
 else
     if $TERM =~ "-256color$" || $TERM == "linux"
         set t_Co=256
@@ -145,7 +145,8 @@ set guioptions=         " no scroll bars
 set laststatus=2        " display status line always
 set list                " show tabs, spaces, trailing blanks
 if has("patch-7.4.710")
-    set listchars=tab:\┃\ ,space:·,trail:~,extends:>,precedes:<,nbsp:+
+    " set listchars=tab:\┃\ ,space:·,trail:~,extends:>,precedes:<,nbsp:+
+    set listchars=tab:\┃\ ,trail:~,extends:>,precedes:<,nbsp:+
 else
     set listchars=tab:\┃\ ,trail:~,extends:>,precedes:<,nbsp:+
 endif
@@ -171,7 +172,7 @@ set lazyredraw ttyfast
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set noexpandtab
+set expandtab
 set autoindent
 set nosmartindent
 set nocindent

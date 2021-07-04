@@ -4,7 +4,8 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
-ZSH_DISABLE_COMPFIX=true
+
+# ZSH_DISABLE_COMPFIX=true
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -12,6 +13,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
 [ -f ~/.my_aliases.sh ] && source $HOME/.my_aliases.sh
 [ -f ~/.my_envs.sh ] && source $HOME/.my_envs.sh
 [ -f ~/.my_secrets.sh ] && source $HOME/.my_secrets.sh
