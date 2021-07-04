@@ -217,7 +217,6 @@ if ! command -v gh &> /dev/null ; then
     git config --global interactive.diffFilter "delta --color-only"
     git config --global delta.features "line-numbers decorations"
     git config --global delta.whitespace-error-style "22 reverse"
-    git config --global 'delta "decorations"'.commit-decoration-style "bold yellow box ul"
 fi
 
 
