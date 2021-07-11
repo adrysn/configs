@@ -130,7 +130,7 @@ if ! command -v rg &> /dev/null ; then
             ;;
         "centos")
             sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/carlwgeorge/ripgrep/repo/epel-7/carlwgeorge-ripgrep-epel-7.repo
-            sudo yum install ripgrep
+            sudo yum install -y ripgrep
             ;;
         "osx")
             brew install ripgrep
@@ -217,6 +217,22 @@ if ! command -v gh &> /dev/null ; then
     git config --global interactive.diffFilter "delta --color-only"
     git config --global delta.features "line-numbers decorations"
     git config --global delta.whitespace-error-style "22 reverse"
+fi
+
+
+# === Install scm_breeze.
+if [[ ! -d "${$HOME}/.scm_breeze" ]] ; then
+    info "Installing scm_breeze ..."
+    git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
+    ${HOME}/.scm_breeze/install.sh
+    case "${OS}" in
+        "osx") sed_cmd="sed -i ''" ;;
+        *) sed_cmd="sed -i" ;;
+    esac
+    [[ -f ${HOME}/.bashrc ]] && ${sed_cmd} '/scm_breeze.sh/d' ${HOME}/.bashrc
+    [[ -f ${HOME}/.bash_profile ]] && ${sed_cmd} '/scm_breeze.sh/d' ${HOME}/.bash_profile
+    [[ -f ${HOME}/.zshrc ]] && ${sed_cmd} '/scm_breeze.sh/d' ${HOME}/.zshrc
+    info "Installed scm_breeze.vim."
 fi
 
 
