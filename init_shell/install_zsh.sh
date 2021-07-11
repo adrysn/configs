@@ -14,7 +14,7 @@ case "${OS}" in
         ;;
     "centos")
         sudo yum update -y
-        sudo yum install vim htop
+        sudo yum install -y vim htop
         ;;
     "osx")
         brew install macvim reattach-to-user-namespace htop
