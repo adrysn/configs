@@ -106,10 +106,10 @@ if ! command -v duf &> /dev/null ; then
         *)
             duf_version=0.6.2
             curl -OL https://github.com/muesli/duf/releases/download/v${duf_version}/duf_${duf_version}_linux_x86_64.tar.gz
-            mkdir duf_v${duf_version}_linux_x86_64
-            tar -xvf duf_v${duf_version}_linux_x86_64.tar.gz -C duf_v${duf_version}_linux_x86_64
-            sudo mv duf_v${duf_version}_linux_x86_64/duf /usr/local/bin/
-            rm -rf duf_v${duf_version}_linux_x86_64*
+            mkdir duf_${duf_version}_linux_x86_64
+            tar -xvf duf_${duf_version}_linux_x86_64.tar.gz -C duf_${duf_version}_linux_x86_64
+            sudo mv duf_${duf_version}_linux_x86_64/duf /usr/local/bin/
+            rm -rf duf_${duf_version}_linux_x86_64*
             ;;
     esac
 fi
@@ -193,7 +193,6 @@ if ! command -v delta &> /dev/null ; then
     git config --global interactive.diffFilter "delta --color-only"
     git config --global delta.features "line-numbers decorations"
     git config --global delta.whitespace-error-style "22 reverse"
-    git config --global 'delta "decorations"'.commit-decoration-style "bold yellow box ul"
 fi
 
 
@@ -221,7 +220,7 @@ fi
 
 
 # === Install scm_breeze.
-if [[ ! -d "${$HOME}/.scm_breeze" ]] ; then
+if [[ ! -d "${ZDOTDIR:-$HOME}/.scm_breeze" ]] ; then
     info "Installing scm_breeze ..."
     git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
     ${HOME}/.scm_breeze/install.sh

@@ -33,7 +33,7 @@ if [[ `echo ${SHELL}` != *"zsh" ]] ; then
     info "Installing zsh ..."
     case "${OS}" in
         "ubuntu") sudo apt install -y zsh ;;
-        "centos") yum install -y zsh ;;
+        "centos") sudo yum install -y zsh ;;
         "osx") brew install zsh ;;
     esac
     chsh -s $(which zsh)
