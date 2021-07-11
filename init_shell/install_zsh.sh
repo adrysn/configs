@@ -10,11 +10,11 @@ set -o pipefail
 case "${OS}" in
     "ubuntu")
         sudo apt update -y
-        sudo apt install -y vim htop
+        sudo apt install -y vim htop ruby
         ;;
     "centos")
         sudo yum update -y
-        sudo yum install -y yum-utils vim htop
+        sudo yum install -y yum-utils vim htop ruby
         ;;
     "osx")
         brew install macvim reattach-to-user-namespace htop
