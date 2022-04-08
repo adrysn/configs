@@ -10,7 +10,7 @@ Directory structure:
 
 ## Collect dotfiles
 
-dotfiles in the local host can be collected by running a convenient script:
+`dotfiles` in the local host can be collected by running a convenient script:
 
 ```bash
 ./collect_dotfiles.sh
