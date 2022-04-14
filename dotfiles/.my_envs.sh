@@ -14,7 +14,8 @@ export PATH="/opt/homebrew/bin:/usr/local/bin:$HOME/bin:$PATH"
 
 # Node.js
 if [ -d "$HOME/.nvm" ]; then
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
@@ -28,6 +29,9 @@ fi
 if [ -d "$HOME/.pyenv/plugins/pyenv-virtualenv" ]; then
     eval "$(pyenv virtualenv-init -)"
 fi
+
+# Golang
+export PATH="$PATH:$HOME/go/bin"
 
 # fzf & ripgrep
 if [ -f "$HOME/.fzf.zsh" ]; then
@@ -44,6 +48,9 @@ export BAT_THEME="Solarized (dark)"
 
 # poetry
 export PATH="$HOME/.poetry/bin:$PATH"
+
+# MacTex
+[ -f "/Library/Tex/texbin" ] && export PATH="$PATH:/Library/TeX/texbin"
 
 # Created by `userpath` on 2020-07-03 03:40:41
 export PATH="$HOME/.local/bin:$PATH"

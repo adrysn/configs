@@ -199,6 +199,8 @@ map <F2> <Esc>:w<CR>:!python %:p<CR>
 inoremap jk <Esc>
 inoremap <C-a> <C-o>0   " move start of the line in insert mode
 inoremap <C-e> <C-o>$   " move end of the line in insert mode
+noremap H ^             " move start of the line in normal mode
+noremap L $             " move end of the line in normal mode
 noremap <Leader>bt :enew<CR>
 noremap <Leader>bq :bp <BAR> bd #<CR>
 noremap <Leader>gs :bp <BAR> bd #<CR>
