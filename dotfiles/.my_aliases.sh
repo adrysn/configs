@@ -1,7 +1,7 @@
 alias ll="ls -l"
-if [ -x "$(command -v exa)" ]; then
-    alias el="exa -bghHliS --group-directories-first"
-    alias es="exa -bghHliSG --group-directories-first"
+if [ -x "$(command -v eza)" ]; then
+    alias ll="eza -bghHliS --group-directories-first"
+    alias ls="eza -bghHliSG --group-directories-first"
 fi
 if [ -x "$(command -v bat)" ]; then
     alias cat="bat"
@@ -13,18 +13,19 @@ if [ -x "$(command -v duf)" ]; then
     alias df="duf"
 fi
 
-if [ -x "$(command -v mvim)" ]; then
-    alias vi="mvim -v"
-    alias vim="mvim"
+if [ -x "$(command -v nvim)" ]; then
+    alias vi="nvim"
+    alias vim="nvim"
 fi
-[ -x "$(command -v rg)" ] && alias rg="rg --max-columns 200"
-[ -x "$(command -v firefox)" ] && alias fx="firefox --new-instance --profile $(mktemp -d)"
+[[ -x "$(command -v rg)" ]] && alias rg="rg --max-columns 200"
+[[ -x "$(command -v firefox)" ]] && alias fx="firefox --new-instance --profile $(mktemp -d)"
 alias bai="backend.ai"
 
 # Systemctl
 alias jctl='sudo journalctl --output cat -f -n 500 -u'
 alias sctlr='sudo systemctl restart'
-alias sctlt='sudo systemctl stop'
+alias sctls='sudo systemctl stop'
+alias sctlst='sudo systemctl status'
 
 # Git
 # Most git aliases are turned off in favor of scm_breeze
@@ -219,3 +220,6 @@ alias vgst='vagrant status'
 alias vgup='vagrant up'
 alias vgdt='vagrant destroy'
 alias vgssh='vagrant ssh'
+
+# Lablup MinIO
+alias lab3='aws --endpoint-url https://bucket.lablup.ai --profile minio-lablup s3'

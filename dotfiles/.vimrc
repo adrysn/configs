@@ -1,21 +1,78 @@
+set exrc
 let mapleader = ","     " easier leader key
-
-" ============================================================================
-" Vundle
 set nocompatible        " this is 21st century
 filetype off            " required
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call plug#begin('~/.vim/plugged')
-" let vundle manage Vundle, required
-Plug 'VundleVim/Vundle.vim'
+if !has('nvim')
+    " ============================================================================
+    " Vundle
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call plug#begin('~/.vim/plugged')
+    " let vundle manage Vundle, required
+    Plug 'VundleVim/Vundle.vim'
 
-" ----------------------------------------------------------------------------
-" Visual
-Plug 'itchyny/lightline.vim'      " pretty status bar
-Plug 'lifepillar/vim-solarized8'  " solarized theme
-Plug 'airblade/vim-gitgutter'     " shows a git diff in the gutter
-Plug 'rakr/vim-one'               " one-light, one-dark color schemes
+    " ----------------------------------------------------------------------------
+    " Visual
+    Plug 'itchyny/lightline.vim'      " pretty status bar
+    Plug 'lifepillar/vim-solarized8'  " solarized theme
+    Plug 'airblade/vim-gitgutter'     " shows a git diff in the gutter
+    Plug 'rakr/vim-one'               " one-light, one-dark color schemes
+
+    " ----------------------------------------------------------------------------
+    " Addons
+    Plug 'jeetsukumaran/vim-buffergator'  " buffer management
+    Plug 'jremmen/vim-ripgrep'
+    Plug 'junegunn/fzf'           " fuzzy finder
+    Plug 'junegunn/fzf.vim'
+    Plug 'Konfekt/FastFold'       " speed up vim's folding
+    Plug 'sjl/vitality.vim'       " make vim play nicely with iTerm 2 and tmux
+
+    " ----------------------------------------------------------------------------
+    " Editing
+    Plug 'alvan/vim-closetag'     " auto-close html tags
+    Plug 'christoomey/vim-sort-motion'    " sort paragraph alphabetically, etc
+    Plug 'christoomey/vim-system-copy'    " interact with system clipboard
+    Plug 'editorconfig/editorconfig-vim'  " editorconfig support
+    Plug 'farmergreg/vim-lastplace'       " reopen files at last position
+    Plug 'jiangmiao/auto-pairs'   " auto-pair parenthesis, brackets
+    Plug 'kana/vim-textobj-indent'        " indent block as a text obj
+    Plug 'kana/vim-textobj-user'          " customize text obj
+    Plug 'terryma/vim-multiple-cursors'   " multiple selection
+    Plug 'tpope/vim-commentary'   " easier commenting
+    Plug 'tpope/vim-endwise'      " cleverly add end or endfunction
+    Plug 'tpope/vim-fugitive'     " Git wrapper
+    Plug 'tpope/vim-surround'     " all about parens, brackets, quotes, ...
+    Plug 'vim-scripts/ReplaceWithRegister'    " replace text with register
+
+    " ----------------------------------------------------------------------------
+    " Syntax
+    Plug 'achimnol/python-syntax'
+    Plug 'cespare/vim-toml'
+    Plug 'hashivim/vim-terraform'
+    Plug 'honza/vim-snippets'
+    Plug 'jonsmithers/vim-html-template-literals' " highlight JS literal string
+    Plug 'leafgarland/typescript-vim'		" highlight TypeSscript
+    Plug 'nvie/vim-flake8'
+    Plug 'pangloss/vim-javascript'
+    Plug 'w0rp/ale'
+
+    " ----------------------------------------------------------------------------
+    " Language specifics
+    "" Python
+    Plug 'tmhedberg/SimpylFold'           " better python folding
+    Plug 'tweekmonster/django-plus.vim'
+    Plug 'Vimjas/vim-python-pep8-indent'  " indentation comply with PEP8
+    "" JS
+    Plug 'heavenshell/vim-jsdoc'          " generate JSDoc
+
+    call plug#end()
+    filetype plugin indent on
+endif
+
+
+" ============================================================================
+" Plugin settings
+
 "" lightline
 set noshowmode
 let g:lightline = {
@@ -28,25 +85,20 @@ let g:lightline = {
     \     'gitbranch': 'FugitiveHead',
     \ },
 \ }
+
 "" vim-solarized
 let g:solarized_diffmode = "high"
+
 "" vim-gitgutter
 set updatetime=200
 
-" ----------------------------------------------------------------------------
-" Addons
-Plug 'jeetsukumaran/vim-buffergator'  " buffer management
-Plug 'jremmen/vim-ripgrep'
-Plug 'junegunn/fzf'           " fuzzy finder
-Plug 'junegunn/fzf.vim'
-Plug 'Konfekt/FastFold'       " speed up vim's folding
-Plug 'sjl/vitality.vim'       " make vim play nicely with iTerm 2 and tmux
 "" buffergator
 let g:buffergator_suppress_keymaps = 1
 let g:buffergator_viewport_split_policy = "B"
 noremap <Leader>jj :BuffergatorMruCyclePrev<CR>
 noremap <Leader>kk :BuffergatorMruCycleNext<CR>
 noremap <Leader>bl :BuffergatorOpen<CR>
+
 "" vim-ripgrep
 let g:rg_highlight = 'true'
 set wildignore+=*.swp,*.zip,*.exe
@@ -54,28 +106,13 @@ set wildignore+=*.jpg,*.png,*.gif
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
+
 "" fzf
 noremap <c-p>      :GFiles<CR>
 noremap <Leader>bb :Buffers<CR>
 noremap <Leader>bs :Files<CR>
 noremap <Leader>bg :GFiles?<CR>
 
-" ----------------------------------------------------------------------------
-" Editing
-Plug 'alvan/vim-closetag'     " auto-close html tags
-Plug 'christoomey/vim-sort-motion'    " sort paragraph alphabetically, etc
-Plug 'christoomey/vim-system-copy'    " interact with system clipboard
-Plug 'editorconfig/editorconfig-vim'  " editorconfig support
-Plug 'farmergreg/vim-lastplace'       " reopen files at last position
-Plug 'jiangmiao/auto-pairs'   " auto-pair parenthesis, brackets
-Plug 'kana/vim-textobj-indent'        " indent block as a text obj
-Plug 'kana/vim-textobj-user'          " customize text obj
-Plug 'terryma/vim-multiple-cursors'   " multiple selection
-Plug 'tpope/vim-commentary'   " easier commenting
-Plug 'tpope/vim-endwise'      " cleverly add end or endfunction
-Plug 'tpope/vim-fugitive'     " Git wrapper
-Plug 'tpope/vim-surround'     " all about parens, brackets, quotes, ...
-Plug 'vim-scripts/ReplaceWithRegister'    " replace text with register
 "" vim-closetag
 let g:closetag_filetypes = 'html,xhtml,phtml,javascript,typescript'
 let g:closetag_regions = {
@@ -85,31 +122,8 @@ let g:closetag_regions = {
       \ 'typescript':     'litHtmlRegion',
       \ }
 
-" ----------------------------------------------------------------------------
-" Syntax
-Plug 'achimnol/python-syntax'
-Plug 'cespare/vim-toml'
-Plug 'hashivim/vim-terraform'
-Plug 'honza/vim-snippets'
-Plug 'jonsmithers/vim-html-template-literals' " highlight JS literal string
-Plug 'leafgarland/typescript-vim'		" highlight TypeSscript
-Plug 'nvie/vim-flake8'
-Plug 'pangloss/vim-javascript'
-Plug 'w0rp/ale'
 "" vim-html-template-literals
 let g:html_indent_style1 = "inc"
-
-" ----------------------------------------------------------------------------
-" Language specifics
-"" Python
-Plug 'tmhedberg/SimpylFold'           " better python folding
-Plug 'tweekmonster/django-plus.vim'
-Plug 'Vimjas/vim-python-pep8-indent'  " indentation comply with PEP8
-"" JS
-Plug 'heavenshell/vim-jsdoc'          " generate JSDoc
-
-call plug#end()
-filetype plugin indent on
 
 
 " ============================================================================
@@ -138,6 +152,7 @@ catch
 endtry
 
 highlight ColorColumn ctermbg=236 guibg=#453440
+" highlight Comment guifg=#002B36 guibg=#839496
 highlight SpecialKey ctermfg=238 guifg=#424242 ctermbg=NONE guibg=NONE
 set colorcolumn=80      " draw vertical line
 set cursorline          " show cursor line indicator

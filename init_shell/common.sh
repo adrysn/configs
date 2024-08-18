@@ -16,7 +16,8 @@ LIGHTGREY="\033[0;37m"
 
 # === Formats
 NC="\033[0m"
-BOLD="\033[0;1m" DIM="\033[0;2m"
+BOLD="\033[0;1m"
+DIM="\033[0;2m"
 UNDERLINE="\033[0;4m"
 
 
@@ -65,3 +66,11 @@ esac
 OS=`lowercase ${OS}`
 readonly OS
 readonly REV
+
+
+# Utility functions
+get_latest_release_from_github() {
+    local user=$1
+    local repo=$2
+    curl -s "https://api.github.com/repos/${user}/${repo}/releases/latest" | grep tag_name | awk '{print $2}' | tr -d 'v",'
+}

@@ -1,14 +1,15 @@
 local wezterm = require 'wezterm'
 
 local module = {}
+local project_dir = wezterm.home_dir .. '/Projects'
 
 
 local function project_dirs()
-  return {
-    '~/Dropbox/devops/backend.ai/bainst',
-    '~/Dropbox/devops/backend.ai/control-panel',
-    -- ... keep going, list all your projects
-  }
+  local projects = { wezterm.home_dir }
+  for _, dir in ipairs(wezterm.glob(project_dir .. '/*')) do
+    table.insert(projects, dir)
+  end
+  return projects
 end
 
 
@@ -32,6 +33,4 @@ function module.choose_project()
   }
 end
 
-
 return module
-

@@ -42,19 +42,14 @@ if [[ ! -d "${ZDOTDIR:-$HOME}/.zprezto" ]] ; then
 fi
 
 
-# === Install exa.
-if ! command -v exa &> /dev/null ; then
+# === Install eza.
+if ! command -v eza &> /dev/null ; then
     case "${OS}" in
         "osx")
-            brew install exa
+            brew install eza
             ;;
-        *)
-            exa_version=0.10.1
-            curl -OL https://github.com/ogham/exa/releases/download/v${exa_version}/exa-linux-x86_64-musl-v${exa_version}.zip
-            unzip exa-linux-x86_64-musl-v${exa_version}.zip -d ./exa/
-            sudo mv exa/bin/exa /usr/local/bin/exa
-            rm -rf ./exa exa-linux-x86_64-musl-v${exa_version}.zip
-            ;;
+        *)  # Rust is required
+            cargo install eza
     esac
 fi
 
@@ -66,8 +61,7 @@ if ! command -v bat &> /dev/null ; then
             sudo apt install -y bat
             ;;
         "centos")
-            # -> bat
-            bat_version=0.18.1
+	        bat_version=$(get_latest_release_from_github sharkdp bat)
             curl -OL https://github.com/sharkdp/bat/releases/download/v${bat_version}/bat-v${bat_version}-x86_64-unknown-linux-musl.tar.gz
             tar -xvzf bat-v${bat_version}-x86_64-unknown-linux-musl.tar.gz -C .
             sudo mv ./bat-v${bat_version}-x86_64-unknown-linux-musl/bat /usr/local/bin/bat
@@ -87,7 +81,7 @@ if ! command -v dust &> /dev/null ; then
             brew install dust
             ;;
         *)
-            dust_version=0.6.0
+	        dust_version=$(get_latest_release_from_github bootandy dust)
             curl -OL https://github.com/bootandy/dust/releases/download/v${dust_version}/dust-v${dust_version}-x86_64-unknown-linux-musl.tar.gz
             tar -xvf dust-v${dust_version}-x86_64-unknown-linux-musl.tar.gz
             sudo mv dust-v${dust_version}-x86_64-unknown-linux-musl/dust /usr/local/bin/
@@ -97,14 +91,14 @@ if ! command -v dust &> /dev/null ; then
 fi
 
 
-# === Install dust.
+# === Install duf.
 if ! command -v duf &> /dev/null ; then
     case "${OS}" in
         "osx")
             brew install duf
             ;;
         *)
-            duf_version=0.6.2
+	    duf_version=$(get_latest_release_from_github muesli duf)
             curl -OL https://github.com/muesli/duf/releases/download/v${duf_version}/duf_${duf_version}_linux_x86_64.tar.gz
             mkdir duf_${duf_version}_linux_x86_64
             tar -xvf duf_${duf_version}_linux_x86_64.tar.gz -C duf_${duf_version}_linux_x86_64
@@ -147,7 +141,7 @@ if ! command -v fd &> /dev/null ; then
             ln -s $(which fdfind) ~/.local/bin/fd
             ;;
         "centos")
-            fd_version=8.2.1
+	        fd_version=$(get_latest_release_from_github sharkdp fd)
             curl -OL https://github.com/sharkdp/fd/releases/download/v8.2.1/fd-v${fd_version}-x86_64-unknown-linux-musl.tar.gz
             tar -xvf fd-v${fd_version}-x86_64-unknown-linux-musl.tar.gz
             sudo mv fd-v${fd_version}-x86_64-unknown-linux-musl/fd /usr/local/bin/
@@ -179,7 +173,7 @@ if ! command -v delta &> /dev/null ; then
         "osx")
             brew install git-delta ;;
         "centos")
-            delta_version=0.8.2
+	        delta_version=$(get_latest_release_from_github dandavison delta)
             curl -OL https://github.com/dandavison/delta/releases/download/${delta_version}/delta-${delta_version}-x86_64-unknown-linux-musl.tar.gz
             tar -xvf delta-${delta_version}-x86_64-unknown-linux-musl.tar.gz
             sudo mv delta-${delta_version}-x86_64-unknown-linux-musl/delta /usr/local/bin/
@@ -202,7 +196,7 @@ if ! command -v gh &> /dev/null ; then
         "osx")
             brew install gh ;;
         "centos")
-            gh_version=1.12.1
+	        gh_version=$(get_latest_release_from_github cli cli)
             curl -OL https://github.com/cli/cli/releases/download/v${gh_version}/gh_${gh_version}_linux_amd64.tar.gz
             tar -xvf gh_${gh_version}_linux_amd64.tar.gz
             sudo mv gh_${gh_version}_linux_amd64/bin/gh /usr/local/bin/
@@ -228,9 +222,9 @@ if [[ ! -d "${ZDOTDIR:-$HOME}/.scm_breeze" ]] ; then
         "osx") sed_cmd="sed -i ''" ;;
         *) sed_cmd="sed -i" ;;
     esac
-    [[ -f ${HOME}/.bashrc ]] && ${sed_cmd} '/scm_breeze.sh/d' ${HOME}/.bashrc
-    [[ -f ${HOME}/.bash_profile ]] && ${sed_cmd} '/scm_breeze.sh/d' ${HOME}/.bash_profile
-    [[ -f ${HOME}/.zshrc ]] && ${sed_cmd} '/scm_breeze.sh/d' ${HOME}/.zshrc
+    [[ -f ${HOME}/.bashrc ]] && ${sed_cmd} "/scm_breeze.sh/d" "${HOME}/.bashrc"
+    [[ -f ${HOME}/.bash_profile ]] && ${sed_cmd} "/scm_breeze.sh/d" "${HOME}/.bash_profile"
+    [[ -f ${HOME}/.zshrc ]] && ${sed_cmd} "/scm_breeze.sh/d" "${HOME}/.zshrc"
     info "Installed scm_breeze.vim."
 fi
 
@@ -241,6 +235,14 @@ if [[ ! -f "${HOME}/.vim/autoload/plug.vim" ]] ; then
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     vim +PlugInstall +qall
     info "Installed plug.vim."
+fi
+
+
+# === Install nvim and its plugins.
+if [[ ! -d "${HOME}/.config/nvim" ]] ; then
+    info "Configuring nvim ..."
+    \cp -rf /tmp/_configs/dotfiles/.config/nvim "${HOME}/.config/"
+    info "Configured nvim."
 fi
 
 
@@ -266,7 +268,13 @@ if ! command -v pyenv &> /dev/null ; then
 fi
 
 
-# === Install nvm.
-if ! command -v nvm &> /dev/null ; then
-    git clone https://github.com/nvm-sh/nvm.git ${HOME}/.nvm
+# # === Install nvm.
+# if ! command -v nvm &> /dev/null ; then
+#     git clone https://github.com/nvm-sh/nvm.git "${HOME}/.nvm"
+# fi
+
+
+# === Install fnm instead of nvm.
+if ! command -v fnm &> /dev/null ; then
+    curl -fsSL https://fnm.vercel.app/install | bash
 fi

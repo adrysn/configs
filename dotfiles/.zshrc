@@ -19,3 +19,7 @@ fi
 [ -f ~/.my_secrets.sh ] && source $HOME/.my_secrets.sh
 
 [ -f ~/.iterm2_shell_integration.zsh ] && source ~/.iterm2_shell_integration.zsh
+
+fpath+=~/.zfunc
+autoload -Uz compinit && compinit
+

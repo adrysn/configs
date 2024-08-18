@@ -17,14 +17,14 @@ case "${OS}" in
         sudo yum install -y yum-utils vim htop ruby
         ;;
     "osx")
-        brew install macvim reattach-to-user-namespace htop
+        brew install neovim reattach-to-user-namespace htop
         ;;
 esac
 
 
 # === Git configs.
 git config --global user.name "Jonghyun Park"
-git config --global user.email "adrysn@gmail.com"
+git config --global user.email "jpark@lablup.com"
 git config --global pull.rebase false
 
 
@@ -40,3 +40,4 @@ if [[ `echo ${SHELL}` != *"zsh" ]] ; then
     info "zsh is now the default shell."
     note "Please launch zsh shell and run install_packages.sh."
 fi
+
